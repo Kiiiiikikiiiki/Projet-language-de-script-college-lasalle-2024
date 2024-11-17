@@ -15,23 +15,146 @@
     <div class="container">
         <div class="animes-list">
             <h1>Top Animes</h1>
-            <ul>
-                <li><a>anime1</a></li>
-                <li><a>anime2</a></li>
-                <li><a>anime3</a></li>
-                <li><a>anime4</a></li>
-            </ul>
+            <div class="carousel-animes">
+                <button class="prev-animes" onclick="scrollCarouselAnimes(-300)">◀</button>
+                <div class="carouselA">
+                    <ul>
+                        <li>
+                            <a>
+                                <img src="./Image/Animes/anime1.png"><br/>
+                                <span>anime1</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a>
+                                <img src="./Image/Animes/anime2.png"><br/>
+                                <span>anime2</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a>
+                                <img src="./Image/Animes/anime3.png"><br/>
+                                <span>anime3</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a>
+                                <img src="./Image/Animes/anime4.png"><br/>
+                                <span>anime4</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a>
+                                <img src="./Image/Animes/anime5.png"><br/>
+                                <span>anime5</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a>
+                                <img src="./Image/Animes/anime5.png"><br/>
+                                <span>anime6</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a>
+                                <img src="./Image/Animes/anime5.png"><br/>
+                                <span>anime7</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a>
+                                <img src="./Image/Animes/anime5.png"><br/>
+                                <span>anime8</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a>
+                                <img src="./Image/Animes/anime5.png"><br/>
+                                <span>anime9</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <button class="next-animes" onclick="scrollCarouselAnimes(300)">▶</button>
+            </div>
         </div>
         <div class="new-episodes">
             <h1>New Episodes</h1>
-            <ul>
-                <li><a>anime1</a></li>
-                <li><a>anime2</a></li>
-                <li><a>anime3</a></li>
-                <li><a>anime4</a></li>
-            </ul>
-        </div>
+            <div class="carousel-episodes">
+                <button class="prev-episodes" onclick="scrollCarouselEpisodes(-300)">◀</button>
+                <div class="carouselE">
+                    <ul>
+                        <li>
+                            <a>
+                                <img src="./Image/Animes/anime1.png"><br/>
+                                <span>anime1</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a>
+                                <img src="./Image/Animes/anime2.png"><br/>
+                                <span>anime2</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a>
+                                <img src="./Image/Animes/anime3.png"><br/>
+                                <span>anime3</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a>
+                                <img src="./Image/Animes/anime4.png"><br/>
+                                <span>anime4</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a>
+                                <img src="./Image/Animes/anime5.png"><br/>
+                                <span>anime5</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a>
+                                <img src="./Image/Animes/anime5.png"><br/>
+                                <span>anime6</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a>
+                                <img src="./Image/Animes/anime5.png"><br/>
+                                <span>anime7</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a>
+                                <img src="./Image/Animes/anime5.png"><br/>
+                                <span>anime8</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a>
+                                <img src="./Image/Animes/anime5.png"><br/>
+                                <span>anime9</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <button class="next-episodes" onclick="scrollCarouselEpisodes(300)">▶</button>
+            </div>
     </div>
+    <script>
+        function scrollCarouselAnimes(offset) {
+            const carousel = document.querySelector(".carouselA");
+            carousel.scrollBy({ left: offset, behavior: "smooth" });
+        }
+
+        function scrollCarouselEpisodes(offset) {
+            const carousel = document.querySelector(".carouselE");
+            carousel.scrollBy({ left: offset, behavior: "smooth" });
+        }
+            
+    </script>
 </body>
 
 </html>
