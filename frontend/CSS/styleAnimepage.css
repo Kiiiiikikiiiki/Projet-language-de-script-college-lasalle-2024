@@ -1,0 +1,126 @@
+*{
+    box-sizing: border-box;
+}
+
+
+a,span, p, tbody, th, td{
+    text-decoration: none !important;
+    color: black !important;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS' !important;
+}
+
+h1, h2, h3, h4, h5, h6{
+    text-decoration:solid;
+    color: black !important;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS' !important;
+}
+
+.background{
+    background-image: url("../Image/Background1.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    filter: blur(3px);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+.info-anime{
+    display: flex;
+    background: rgba(52, 201, 172, 0.4);
+    box-sizing: border-box;
+    box-shadow: 0 15px 25px rgba(0, 0, 0, .7);
+    border-radius: 10px;
+    text-align: left;
+    margin: 10px;
+}
+
+.description-anime{
+    padding: 25px;
+    text-align: justify;
+}
+
+.description-anime h1{
+    font-size: 48px;
+}
+
+.description-anime p{
+    font-size: 24px;
+}
+
+.image-anime{
+    display: block;
+    width: 20%;
+    margin: 10px;
+    text-align: center;
+}
+
+.image-anime img{
+    margin-bottom: 10px;
+    box-shadow: 0 15px 25px rgba(0, 0, 0, .7);
+}
+
+.image-anime button{
+    background: none;
+    border-bottom: #333 1px solid;
+    margin:0px 25px 0px 25px;
+    font-size: 16px;
+}
+
+button.add-anime{
+    position: absolute;
+    display: flex;
+    border: none !important;
+    top: 20px; 
+    left: 220px; 
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    z-index: 2;
+}
+
+.add-anime img{
+    width: 30px;
+    height: 30px;
+}
+.modal-header{
+    background-color: rgb(30, 98, 135);
+    color: white;
+    text-align: center;
+}
+
+.episodes-anime{
+    display: flex;
+    flex-direction: column;
+    background: rgba(52, 201, 172, 0.4);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 10px;
+    margin:20px 10px 0 10px;
+    box-sizing: border-box;
+}
+
+.episodes-anime button{
+    background: none;
+    border: none;
+}
+
+.episodes-anime table{
+    width: 100%;
+    border-collapse: collapse;
+    box-sizing: border-box;
+    color: #000;
+}
+
+.episodes-table td {
+    padding: 8px;
+    border-bottom: #333 1px solid;
+}
+
+
+
+

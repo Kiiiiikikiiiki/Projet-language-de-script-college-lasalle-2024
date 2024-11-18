@@ -29,7 +29,7 @@ h1, h2, h3, h4, h5, h6{
     z-index: -1;
 }
 
-.animes-list, .new-episodes{
+.animes-list{
     background: rgba(52, 201, 172, .4);
     box-sizing: border-box;
     padding: 10px;
@@ -38,17 +38,17 @@ h1, h2, h3, h4, h5, h6{
     position: relative;
 }
 
-.animes-list ul, .new-episodes ul{
+.animes-list ul{
     list-style: none;
     margin: 0;
     padding: 0;
 }
 
-.animes-list li, .new-episodes li{
+.animes-list li{
     flex-shrink: 0;
 }
 
-.animes-list li a, .new-episodes li a{
+.animes-list li a{
     display: block;
     text-align: center;
     padding: 14px 16px;
@@ -62,7 +62,7 @@ h1, h2, h3, h4, h5, h6{
     margin: 0 auto;
 }
 
-.carousel-animes, .carousel-episodes{
+.carousel-animes{
     display: flex;
     align-items: center;
     position: relative;
@@ -71,13 +71,13 @@ h1, h2, h3, h4, h5, h6{
     margin: 0 auto;
 }
 
-.carouselA, .carouselE {
+.carouselA{
     display: flex;
     overflow-x: auto;
     scroll-behavior: smooth;
 }
 
-.carouselA ul, .carouselE ul{
+.carouselA ul{
     display: flex;
     margin: 0;
     padding: 0;
@@ -85,23 +85,23 @@ h1, h2, h3, h4, h5, h6{
     gap: 10px;
 }
 
-.carouselA::-webkit-scrollbar, .carouselE::-webkit-scrollbar{
+.carouselA::-webkit-scrollbar{
     height: 8px;
 }
 
-.carouselA::-webkit-scrollbar-thumb, .carouselE::-webkit-scrollbar-thumb{
+.carouselA::-webkit-scrollbar-thumb{
     background-color:  rgb(30, 98, 135);
     border-radius: 4px;
 }
 
-.carouselA li, .carouselE li{
+.carouselA li{
     flex-shrink: 0;
     min-width: 100px;
     margin: 5px;
     text-align: center;
 }
 
-button.prev-animes, button.next-animes, button.prev-episodes, button.next-episodes{
+button.prev-animes, button.next-animes{
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -114,11 +114,11 @@ button.prev-animes, button.next-animes, button.prev-episodes, button.next-episod
     z-index: 2;
 }
 
-button.prev-animes, button.prev-episodes{
+button.prev-animes{
     left: 10px;
 }
 
-button.next-animes, button.next-episodes{
+button.next-animes{
     right: 10px;
 }
 
@@ -126,12 +126,9 @@ button.next-animes, button.next-episodes{
     position: relative;
     display: inline-block;
     width: 100%;
-    text-align: left;
-    max-width: 300px;
 }
 
-
-button.add-anime{
+button.delete-anime{
     position: absolute;
     background: none;
     top: 15px; 
@@ -142,7 +139,7 @@ button.add-anime{
     z-index: 2;
 }
 
-.add-anime img{
+.delete-anime img{
     width: 20px;
     height: 20px;
 }

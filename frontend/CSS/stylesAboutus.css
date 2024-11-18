@@ -1,0 +1,67 @@
+/*Nouveaux style CSS*/
+
+.container { /* Contenedor principal */
+    display: grid;
+    grid-template-columns: 1fr 1fr;  
+    justify-items: center;  
+    height: 100vh;
+    width: 100vw;
+    box-sizing: border-box;
+}
+
+*{
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+
+a,span, p{
+    text-decoration: none !important;
+    color: white !important;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS' !important;
+}
+
+h1, h2, h3, h4, h5, h6{
+    text-decoration:solid;
+    color: black !important;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS' !important;
+}
+
+.luffy, .law {
+    width: 30vw; 
+    height: auto; 
+    background-color: rgba(52, 201, 172, .4);
+    display: grid;
+    place-items: center;
+    border: #B2A59F solid 2px; 
+    border-radius: 10px;
+    box-sizing: border-box;
+    margin: 50px;
+    text-align: center;
+}
+
+.luffy p, .law p {
+    color:white;
+}
+
+.luffy img, .law img {
+    width: 90%;
+    height: auto;
+    margin-top: 10px;
+}
+
+.background{
+    background-image: url("../Image/Background1.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    filter: blur(3px);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+

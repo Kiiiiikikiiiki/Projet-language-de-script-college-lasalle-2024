@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./CSS/styleAnimes.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <title>Anime Page: Munchyroll</title>
+</head>
+
+<body>
+    <div class="background">
+    </div>
+    <div class="my-container">
+        <div class="animes-list">
+            <h1>Your Favorite Animes</h1>
+            <div class="carousel-animes">
+                <button class="prev-animes" onclick="scrollCarouselAnimes(-300)">◀</button>
+                <div class="carouselA">
+                    <ul>
+                        <li>
+                            <div class="image-container">
+                                <a href="./AnimePage.html" target="contentFrame"><img src="./Image/Animes/anime1.png" alt="anime1"></a>
+                                <button type="button" class="btn btn-primary delete-anime" data-toggle="modal" data-target="#delete-anime-modal">
+                                    <img src="./Image/Icons/delete.png" alt="delete icon">
+                                </button>
+                            </div>
+                            <h3>Fairy Tail</h3>
+                        </li>
+                        <li>
+                            <div class="image-container">
+                                <a href="./AnimePage.html" target="contentFrame"><img src="./Image/Animes/anime2.png" alt="anime2"></a>
+                                <button type="button" class="btn btn-primary delete-anime" data-toggle="modal" data-target="#delete-anime-modal">
+                                    <img src="./Image/Icons/delete.png" alt="delete icon">
+                                </button>
+                            </div>
+                            <h3>Attack On Titan</h3>
+                        </li>
+                        <li>
+                            <div class="image-container">
+                                <a href="./AnimePage.html" target="contentFrame"><img src="./Image/Animes/anime3.png" alt="anime3"></a>
+                                <button type="button" class="btn btn-primary delete-anime" data-toggle="modal" data-target="#delete-anime-modal">
+                                    <img src="./Image/Icons/delete.png" alt="delete icon">
+                                </button>
+                            </div>
+                            <h3>Dragon Ball Super</h3>
+                        </li>
+                        <li>
+                            <div class="image-container">
+                                <a href="./AnimePage.html" target="contentFrame"><img src="./Image/Animes/anime4.png" alt="anime4"></a>
+                                <button type="button" class="btn btn-primary delete-anime" data-toggle="modal" data-target="#delete-anime-modal">
+                                    <img src="./Image/Icons/delete.png" alt="delete icon">
+                                </button>
+                            </div>
+                            <h3>One Piece</h3>
+                        </li>
+                        <li>
+                            <div class="image-container">
+                                <a href="./AnimePage.html" target="contentFrame"><img src="./Image/Animes/anime5.png" alt="anime5"></a>
+                                <button type="button" class="btn btn-primary delete-anime" data-toggle="modal" data-target="#delete-anime-modal">
+                                    <img src="./Image/Icons/delete.png" alt="delete icon">
+                                </button>
+                            </div>
+                            <h3>Dandadan</h3>
+                        </li>
+                        <li>
+                            <div class="image-container">
+                                <a href="./AnimePage.html" target="contentFrame"><img src="./Image/Animes/anime5.png" alt="anime5"></a>
+                                <button type="button" class="btn btn-primary delete-anime" data-toggle="modal" data-target="#delete-anime-modal">
+                                    <img src="./Image/Icons/delete.png" alt="delete icon">
+                                </button>
+                            </div>
+                            <h3>Dandadan</h3>
+                        </li>
+                        <li>
+                            <div class="image-container">
+                                <a href="./AnimePage.html" target="contentFrame"><img src="./Image/Animes/anime5.png" alt="anime5"></a>
+                                <button type="button" class="btn btn-primary delete-anime" data-toggle="modal" data-target="#delete-anime-modal">
+                                    <img src="./Image/Icons/delete.png" alt="delete icon">
+                                </button>
+                            </div>
+                            <h3>Dandadan</h3>
+                        </li>
+                        <li>
+                            <div class="image-container">
+                                <a href="./AnimePage.html" target="contentFrame"><img src="./Image/Animes/anime5.png" alt="anime5"></a>
+                                <button type="button" class="btn btn-primary delete-anime" data-toggle="modal" data-target="#delete-anime-modal">
+                                    <img src="./Image/Icons/delete.png" alt="delete icon">
+                                </button>
+                            </div>
+                            <h3>Dandadan</h3>
+                        </li>
+                        <li>
+                            <div class="image-container">
+                                <img src="./Image/Animes/anime5.png" alt="anime1">
+                                <button type="button" class="btn btn-primary delete-anime" data-toggle="modal" data-target="#delete-anime-modal">
+                                    <img src="./Image/Icons/delete.png" alt="delete icon">
+                                </button>
+                            </div>
+                            <h3>Dandadan</h3>
+                        </li>
+                    </ul>
+                </div>
+                <button class="next-animes" onclick="scrollCarouselAnimes(300)">▶</button>
+            </div>
+        </div>
+    </div>
+    <!-- Delete Anime Modal -->
+    <div id="delete-anime-modal" class="modal fade" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form>
+                    <div class="modal-header">
+                        <h3 class="modal-title">Delete Anime</h3>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Are you sure you want to remove this Anime from your list?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Delete</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script>
+        function scrollCarouselAnimes(offset) {
+            const carousel = document.querySelector(".carouselA");
+            carousel.scrollBy({ left: offset, behavior: "smooth" });
+        }
+  
+    </script>
+</body>
+
+</html>
