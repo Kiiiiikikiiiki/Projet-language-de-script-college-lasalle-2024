@@ -7,7 +7,7 @@ class Episode:
     """
     
     def __init__(self, episode_name : str, comments : list[Comment.Comment], rating : float, nb_like : int,
-                 nb_dislike : int, release_date : datetime.date, modification_date : datetime.date = None,
+                 nb_dislike : int, picture_url : str, release_date : datetime.date, modification_date : datetime.date = None,
                  episode_id : int = None, season_id : int = None):
         """
         Constructor for an Episode object.
@@ -18,6 +18,7 @@ class Episode:
         :param rating: Rating of the episode (between 0 and 5 inclusive).
         :param nb_like: Number of likes for the episode.
         :param nb_dislike: Number of dislikes for the episode.
+        :param picture_url: URL of the picture associated with the episode.
         :param season_id: Unique identifier of the season to which the episode belongs (defaults to None if not building the class for database).
         :param release_date: Release date of the episode.
         :param modification_date: Modification date of the episode, defaults to None.
@@ -28,6 +29,7 @@ class Episode:
         self.rating = rating
         self.nb_like = nb_like
         self.nb_dislike = nb_dislike
+        self.picture_url = picture_url
         self.__season_id = season_id
         self.release_date = release_date
         self.__modification_date = modification_date

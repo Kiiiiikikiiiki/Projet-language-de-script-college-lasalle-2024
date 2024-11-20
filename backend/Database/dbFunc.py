@@ -1,7 +1,7 @@
 import sqlite3
 import datetime
-import backend.Class_Domain.Season as Season
 
+# region Function CRUD des tables principales
 
 def obtenir_connection(db_name: str) -> sqlite3.Connection:
     """
@@ -63,7 +63,7 @@ def add_member(conn: sqlite3.Connection, username: str, password_hash: str) -> b
         return False
     
 def add_anime(conn: sqlite3.Connection, anime_name: str, desc: str, rating: float,
-              types: list[str], release_date: datetime.date = datetime.date.today()) -> bool:
+              types: list[str], picture_url: str, release_date: datetime.date = datetime.date.today()) -> bool:
     """
     Adds a new anime to the database
 
@@ -73,14 +73,15 @@ def add_anime(conn: sqlite3.Connection, anime_name: str, desc: str, rating: floa
         desc (str): The description of the anime    
         rating (float): The rating of the anime
         types (list[str]): The types of the anime
+        picture_url (str): The url of the picture of the anime
         release_date (datetime.date): The release date of the anime (defaults to today's date)
     Returns:
         bool: True if the anime was added successfully, False otherwise
     """
     try:
         cursor = conn.cursor()
-        cursor.execute("INSERT INTO anime (anime_name, desc, rating, release_date) VALUES" +
-                       "(?, ?, ?, ?)", (anime_name, desc, rating, release_date))
+        cursor.execute("INSERT INTO anime (anime_name, desc, rating, picture_url, release_date) VALUES" +
+                       "(?, ?, ?, ?, ?)", (anime_name, desc, rating, picture_url ,release_date))
         
         anime_name = cursor.lastrowid
         
@@ -119,4 +120,105 @@ def add_season(conn: sqlite3.Connection, season_name: str, anime_name: str,
         print(e)
         return False
 
-# TODO: Continue de rest of the functions
+def add_episode(conn : sqlite3.Connection, episode_name : str, rating : float, nb_like : int,
+                nb_dislike : int, picture_url : str, season_id : int, release_date : datetime.date = datetime.date.today()) -> bool:
+    """
+    Adds a new episode to the database
+
+    Args:
+        conn (sqlite3.Connection): The connection to the database
+        episode_name (str): The name of the episode
+        rating (float): The rating of the episode
+        nb_like (int): The number of likes for the episode
+        nb_dislike (int): The number of dislikes for the episode
+        picture_url (str): The url of the picture of the episode
+        season_id (int): The id of the season to which the episode belongs
+        release_date (datetime.date): The release date of the episode (defaults to today's date)
+    Returns:
+        bool: True if the episode was added successfully, False otherwise
+    """
+    try:
+        cursor = conn.cursor()
+        cursor.execute("INSERT INTO episode (episode_name, rating, nb_like, nb_dislike, picture_url, season_id, release_date) VALUES" +
+                       "(?, ?, ?, ?, ?, ?, ?)", (episode_name, rating, nb_like, nb_dislike, picture_url, season_id, release_date))
+        conn.commit()
+        conn.close()
+        return True
+    except sqlite3.Error as e:    
+        print(e)
+        return False
+    
+def add_comment(conn : sqlite3.Connection, comment_content : str, member_id : int,
+                episode_id : int, nb_like : int, nb_dislike : int,
+                creation_date : datetime.date = datetime.date.today()) -> bool:
+    """
+    Adds a new comment to the database
+
+    Args:
+        conn (sqlite3.Connection): The connection to the database
+        comment_content (str): The content of the comment
+        member_id (int): The id of the member who wrote the comment
+        episode_id (int): The id of the episode to which the comment belongs
+        nb_like (int): The number of likes for the comment
+        nb_dislike (int): The number of dislikes for the comment
+        creation_date (datetime.date): The creation date of the comment (defaults to today's date)
+    Returns:
+        bool: True if the comment was added successfully, False otherwise
+    """
+    try:
+        cursor = conn.cursor()
+        cursor.execute("INSERT INTO comment (comment_content, member_id, episode_id, nb_like, nb_dislike, creation_date) VALUES" +
+                       "(?, ?, ?, ?, ?, ?)", (comment_content, member_id, episode_id, nb_like, nb_dislike, creation_date))
+        conn.commit()
+        conn.close()
+        return True
+    except sqlite3.Error as e:
+        print(e)
+        return False
+
+# endregion  
+
+# region Function CRUD des tables d'association
+def add_memberAnime(conn: sqlite3.Connection, member_id: int, anime_name: str) -> bool:
+    """
+    Adds a new member_anime to the database
+
+    Args:
+        conn (sqlite3.Connection): The connection to the database
+        member_id (int): The id of the member
+        anime_name (str): The name of the anime
+    Returns:
+        bool: True if the member_anime was added successfully, False otherwise
+    """
+    try:
+        cursor = conn.cursor()
+        cursor.execute("INSERT INTO memberAnime (member_id, anime_name) VALUES (?, ?)", (member_id, anime_name))
+        conn.commit()
+        conn.close()
+        return True
+    except sqlite3.Error as e:
+        print(e)
+        return False
+    
+def add_memberComment(conn: sqlite3.Connection, member_id: int, comment_id: int) -> bool:
+    """
+    Adds a new member_comment to the database
+
+    Args:
+        conn (sqlite3.Connection): The connection to the database
+        member_id (int): The id of the member
+        comment_id (int): The id of the comment
+    Returns:
+        bool: True if the member_comment was added successfully, False otherwise
+    """
+    try:
+        cursor = conn.cursor()        
+        cursor.execute("INSERT INTO memberComment (member_id, comment_id) VALUES (?, ?)", (member_id, comment_id))
+        conn.commit()
+        conn.close()
+        return True
+    except sqlite3.Error as e:
+        print(e)
+        return False   
+
+# endregion

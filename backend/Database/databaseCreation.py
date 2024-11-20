@@ -32,6 +32,7 @@ cursor.execute('''
         anime_name TEXT PRIMARY KEY,
         desc TEXT NOT NULL,
         rating REAL NOT NULL CHECK(rating >= 0 AND rating <= 5),
+        picture_url TEXT,
         release_date DATE NOT NULL,
         modification_date DATE
     )        
@@ -58,6 +59,7 @@ cursor.execute('''
         rating REAL NOT NULL CHECK(rating >= 0 AND rating <= 5),
         nb_like INTEGER NOT NULL,
         nb_dislike INTEGER NOT NULL,
+        picture_url TEXT,
         season_id INTEGER NOT NULL,
         release_date DATE NOT NULL,
         modification_date DATE,
@@ -109,18 +111,6 @@ cursor.execute('''
     )
 ''')
 
-# Table animeSeason
-cursor.execute('''
-    CREATE TABLE IF NOT EXISTS animeSeason (
-        anime_name TEXT NOT NULL,
-        season_id INTEGER NOT NULL,
-        
-        PRIMARY KEY (anime_name, season_id),
-        FOREIGN KEY (anime_name) REFERENCES anime(anime_name),
-        FOREIGN KEY (season_id) REFERENCES season(season_id)
-    )
-''')
-
 # Table animeType
 cursor.execute('''
     CREATE TABLE IF NOT EXISTS animeType (
@@ -129,30 +119,6 @@ cursor.execute('''
         
         PRIMARY KEY (anime_name, type),
         FOREIGN KEY (anime_name) REFERENCES anime(anime_name)
-    )
-''')
-
-# Table seasonEpisode
-cursor.execute('''
-    CREATE TABLE IF NOT EXISTS seasonEpisode (
-        season_id INTEGER NOT NULL,
-        episode_id INTEGER NOT NULL,
-        
-        PRIMARY KEY (season_id, episode_id),
-        FOREIGN KEY (season_id) REFERENCES season(season_id),
-        FOREIGN KEY (episode_id) REFERENCES episode(episode_id)
-    )
-''')
-
-# Table episodeComment
-cursor.execute('''
-    CREATE TABLE IF NOT EXISTS episodeComment (
-        episode_id INTEGER NOT NULL,
-        comment_id INTEGER NOT NULL,
-        
-        PRIMARY KEY (episode_id, comment_id),
-        FOREIGN KEY (episode_id) REFERENCES episode(episode_id),
-        FOREIGN KEY (comment_id) REFERENCES comment(comment_id)
     )
 ''')
 
