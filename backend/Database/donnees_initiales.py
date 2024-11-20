@@ -11,5 +11,6 @@ dbFunc.add_admin(conn, "Law", User.get_hash_password("5678"))
 #Création des membres
 dbFunc.add_member(conn, "Alejo0105", User.get_hash_password("Berrio"))
 dbFunc.add_member(conn, "Gino12", User.get_hash_password("Noel"))
+dbFunc.add
 
 
