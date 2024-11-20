@@ -20,6 +20,15 @@ def obtenir_connection(db_name: str) -> sqlite3.Connection:
         print(e)
         return None
     
+def fermer_connection(conn: sqlite3.Connection) -> None:
+    """
+    Closes the connection to the database
+
+    Args:
+        conn (sqlite3.Connection): The connection to the database
+    """
+    conn.close()  
+    
 def add_admin(conn: sqlite3.Connection, username: str, password_hash: str) -> bool:
     """
     Adds a new admin to the database
@@ -35,7 +44,6 @@ def add_admin(conn: sqlite3.Connection, username: str, password_hash: str) -> bo
         cursor = conn.cursor()
         cursor.execute("INSERT INTO admin (username, password_hash) VALUES (?, ?)", (username, password_hash))
         conn.commit()
-        conn.close()
         return True
     except sqlite3.Error as e:
         print(e)
@@ -56,7 +64,6 @@ def add_member(conn: sqlite3.Connection, username: str, password_hash: str) -> b
         cursor = conn.cursor()
         cursor.execute("INSERT INTO member (username, password_hash) VALUES (?, ?)", (username, password_hash))
         conn.commit()
-        conn.close()
         return True
     except sqlite3.Error as e:
         print(e)
@@ -90,7 +97,6 @@ def add_anime(conn: sqlite3.Connection, anime_name: str, desc: str, rating: floa
                            (anime_name, type))
             
         conn.commit()
-        conn.close()
         return True
     except sqlite3.Error as e:
         print(e)
@@ -114,7 +120,6 @@ def add_season(conn: sqlite3.Connection, season_name: str, anime_name: str,
         cursor.execute("INSERT INTO season (season_name, anime_name, release_date) VALUES" +
                        "(?, ?, ?)", (season_name, anime_name, release_date))
         conn.commit()
-        conn.close()
         return True
     except sqlite3.Error as e:
         print(e)
@@ -142,7 +147,6 @@ def add_episode(conn : sqlite3.Connection, episode_name : str, rating : float, n
         cursor.execute("INSERT INTO episode (episode_name, rating, nb_like, nb_dislike, picture_url, season_id, release_date) VALUES" +
                        "(?, ?, ?, ?, ?, ?, ?)", (episode_name, rating, nb_like, nb_dislike, picture_url, season_id, release_date))
         conn.commit()
-        conn.close()
         return True
     except sqlite3.Error as e:    
         print(e)
@@ -170,7 +174,6 @@ def add_comment(conn : sqlite3.Connection, comment_content : str, member_id : in
         cursor.execute("INSERT INTO comment (comment_content, member_id, episode_id, nb_like, nb_dislike, creation_date) VALUES" +
                        "(?, ?, ?, ?, ?, ?)", (comment_content, member_id, episode_id, nb_like, nb_dislike, creation_date))
         conn.commit()
-        conn.close()
         return True
     except sqlite3.Error as e:
         print(e)
@@ -194,7 +197,6 @@ def add_memberAnime(conn: sqlite3.Connection, member_id: int, anime_name: str) -
         cursor = conn.cursor()
         cursor.execute("INSERT INTO memberAnime (member_id, anime_name) VALUES (?, ?)", (member_id, anime_name))
         conn.commit()
-        conn.close()
         return True
     except sqlite3.Error as e:
         print(e)
@@ -215,7 +217,6 @@ def add_animeType(conn: sqlite3.Connection, anime_name: str, type: str) -> bool:
         cursor = conn.cursor()
         cursor.execute("INSERT INTO animeType (anime_name, type) VALUES (?, ?)", (anime_name, type))
         conn.commit()
-        conn.close()
         return True
     except sqlite3.Error as e:
         print(e)
@@ -236,7 +237,6 @@ def add_commentComment(conn: sqlite3.Connection, parent_comment_id: int, child_c
         cursor = conn.cursor()
         cursor.execute("INSERT INTO commentComment (comment_id, reply_id) VALUES (?, ?)", (parent_comment_id, child_comment_id))
         conn.commit()
-        conn.close()
         return True
     except sqlite3.Error as e:
         print(e)        
@@ -258,7 +258,6 @@ def add_ratingAnime(conn: sqlite3.Connection, member_id: int, anime_name: str, r
         cursor = conn.cursor()
         cursor.execute("INSERT INTO ratingAnime (member_id, anime_name, rating) VALUES (?, ?, ?)", (member_id, anime_name, rating))
         conn.commit()
-        conn.close()
         return True
     except sqlite3.Error as e:
         print(e)
@@ -280,7 +279,6 @@ def add_ratingEpisode(conn: sqlite3.Connection, member_id: int, episode_id: int,
         cursor = conn.cursor()
         cursor.execute("INSERT INTO ratingEpisode (member_id, episode_id, rating) VALUES (?, ?, ?)", (member_id, episode_id, rating))
         conn.commit()
-        conn.close()
         return True
     except sqlite3.Error as e:        
         print(e)

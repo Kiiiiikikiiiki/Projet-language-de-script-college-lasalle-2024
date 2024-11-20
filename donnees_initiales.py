@@ -1,5 +1,5 @@
-import dbFunc 
-from Class_Domain.User import User
+import backend.Database.dbFunc as dbFunc
+from backend.Class_Domain.User import User
 
 conn = dbFunc.obtenir_connection("backend/Database/munchyroll.db")
 
