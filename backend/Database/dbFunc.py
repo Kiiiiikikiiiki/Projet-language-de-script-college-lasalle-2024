@@ -200,25 +200,90 @@ def add_memberAnime(conn: sqlite3.Connection, member_id: int, anime_name: str) -
         print(e)
         return False
     
-def add_memberComment(conn: sqlite3.Connection, member_id: int, comment_id: int) -> bool:
+def add_animeType(conn: sqlite3.Connection, anime_name: str, type: str) -> bool:
     """
-    Adds a new member_comment to the database
+    Adds a new anime_type to the database
 
     Args:
         conn (sqlite3.Connection): The connection to the database
-        member_id (int): The id of the member
-        comment_id (int): The id of the comment
+        anime_name (str): The name of the anime
+        type (str): The type of the anime
     Returns:
-        bool: True if the member_comment was added successfully, False otherwise
+        bool: True if the anime_type was added successfully, False otherwise
     """
     try:
-        cursor = conn.cursor()        
-        cursor.execute("INSERT INTO memberComment (member_id, comment_id) VALUES (?, ?)", (member_id, comment_id))
+        cursor = conn.cursor()
+        cursor.execute("INSERT INTO animeType (anime_name, type) VALUES (?, ?)", (anime_name, type))
         conn.commit()
         conn.close()
         return True
     except sqlite3.Error as e:
         print(e)
-        return False   
+        return False
+
+def add_commentComment(conn: sqlite3.Connection, parent_comment_id: int, child_comment_id: int) -> bool:
+    """
+    Adds a new comment_comment to the database
+
+    Args:
+        conn (sqlite3.Connection): The connection to the database
+        parent_comment_id (int): The id of the parent comment    
+        child_comment_id (int): The id of the child comment
+    Returns:
+        bool: True if the comment_comment was added successfully, False otherwise
+    """
+    try:
+        cursor = conn.cursor()
+        cursor.execute("INSERT INTO commentComment (comment_id, reply_id) VALUES (?, ?)", (parent_comment_id, child_comment_id))
+        conn.commit()
+        conn.close()
+        return True
+    except sqlite3.Error as e:
+        print(e)        
+        return False
+
+def add_ratingAnime(conn: sqlite3.Connection, member_id: int, anime_name: str, rating: float) -> bool:
+    """
+    Adds a new rating_anime to the database
+
+    Args:
+        conn (sqlite3.Connection): The connection to the database
+        member_id (int): The id of the member
+        anime_name (str): The name of the anime
+        rating (float): The rating of the anime
+    Returns:
+        bool: True if the rating_anime was added successfully, False otherwise
+    """
+    try:
+        cursor = conn.cursor()
+        cursor.execute("INSERT INTO ratingAnime (member_id, anime_name, rating) VALUES (?, ?, ?)", (member_id, anime_name, rating))
+        conn.commit()
+        conn.close()
+        return True
+    except sqlite3.Error as e:
+        print(e)
+        return False
+
+def add_ratingEpisode(conn: sqlite3.Connection, member_id: int, episode_id: int, rating: float) -> bool:
+    """
+    Adds a new rating_episode to the database
+
+    Args:
+        conn (sqlite3.Connection): The connection to the database
+        member_id (int): The id of the member
+        episode_id (int): The id of the episode
+        rating (float): The rating of the episode
+    Returns:
+        bool: True if the rating_episode was added successfully, False otherwise
+    """
+    try:
+        cursor = conn.cursor()
+        cursor.execute("INSERT INTO ratingEpisode (member_id, episode_id, rating) VALUES (?, ?, ?)", (member_id, episode_id, rating))
+        conn.commit()
+        conn.close()
+        return True
+    except sqlite3.Error as e:        
+        print(e)
+        return False
 
 # endregion
