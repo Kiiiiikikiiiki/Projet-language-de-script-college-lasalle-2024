@@ -32,6 +32,7 @@ cursor.execute('''
         anime_name TEXT PRIMARY KEY,
         desc TEXT NOT NULL,
         rating REAL NOT NULL CHECK(rating >= 0 AND rating <= 5),
+        picture_url TEXT,
         release_date DATE NOT NULL,
         modification_date DATE
     )        
@@ -58,6 +59,7 @@ cursor.execute('''
         rating REAL NOT NULL CHECK(rating >= 0 AND rating <= 5),
         nb_like INTEGER NOT NULL,
         nb_dislike INTEGER NOT NULL,
+        picture_url TEXT,
         season_id INTEGER NOT NULL,
         release_date DATE NOT NULL,
         modification_date DATE,
