@@ -71,7 +71,7 @@ iframe {
 
 .search-container{
     position: absolute;
-    right: 20px;
+    right: 100px;
     top: 35px;
 }
 
@@ -99,6 +99,21 @@ iframe {
     width: 30px;
     height: 30px;
     vertical-align: middle;
+}
+
+.logout-section{
+    position: absolute;
+    right: 10px;
+    top: 35px;
+}
+
+.logout-section button{
+    background: none;
+}
+
+.logout-section img{
+    width: 40px;
+    height: 40px;
 }
 
 
