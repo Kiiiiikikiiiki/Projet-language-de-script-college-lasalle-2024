@@ -1,5 +1,5 @@
 import datetime
-import Comment
+import backend.Class_Domain.Comment as Comment
 
 class Episode:
     """

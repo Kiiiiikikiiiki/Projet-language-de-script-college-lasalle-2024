@@ -1,4 +1,4 @@
-import User
+import backend.Class_Domain.User as User
 
 
 class Admin(User.User):

@@ -1,5 +1,5 @@
 import datetime
-import Season
+import backend.Class_Domain.Season as Season
 
 class Anime:
     """

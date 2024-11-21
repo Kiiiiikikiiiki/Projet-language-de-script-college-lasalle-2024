@@ -1,5 +1,5 @@
 import datetime
-import Episode
+import backend.Class_Domain.Episode as Episode
 
 class Season:
     """
