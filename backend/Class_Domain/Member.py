@@ -1,6 +1,5 @@
-import User
-import Anime
-import Comment
+import backend.Class_Domain.User as User
+import backend.Class_Domain.Comment as Comment
 
 class Member(User.User):
     """
@@ -8,7 +7,7 @@ class Member(User.User):
     Create a member that will be able to navigate and interact on the web application
     """
     
-    def __init__(self, username : str, password_hash : str, anime_list: list[Anime.Anime],
+    def __init__(self, username : str, password_hash : str, anime_list: list[str],
                  profile_picture : str, comments : list[Comment.Comment], member_id : int = None):
         """
         Constructor for a Member object
