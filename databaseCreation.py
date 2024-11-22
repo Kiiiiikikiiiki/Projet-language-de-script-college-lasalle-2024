@@ -1,5 +1,5 @@
 import sqlite3
-from dbFunc import obtenir_connection
+from backend.Database.dbFunc import obtenir_connection
 
 # Connection a la base de données
 conn = obtenir_connection("backend/Database/munchyroll.db")
