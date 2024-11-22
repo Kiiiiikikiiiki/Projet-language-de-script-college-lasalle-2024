@@ -84,10 +84,33 @@ h1, h2, h3, h4, h5, h6{
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS';
 }
 
-.episode-title button {
+.comments button {
     background: none;
     border-bottom: #333 1px solid;
+    margin: 0px 25px 0px 25px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS';
+    color: black;
 }
+
+.writing-field{
+    margin: 0;
+    color: black;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS';
+    display: flex;
+}
+
+.writing-field textarea {
+    background:  rgb(30, 98, 135);
+    border-bottom: #333 1px solid;
+    width: 100%;
+}
+
+.writing-field button {
+    margin: 0 !important;
+}
+
+
+
 
 
 
