@@ -46,6 +46,10 @@
                     Maecenas convallis massa eget ligula varius, ut posuere justo convallis.
                     Pellentesque non diam hendrerit, commodo massa eu, aliquet eros.
                 </p>
+                <button id="add-season" type="button" class="btn btn-primary" data-toggle="modal" data-target="#add-season-modal"><img src="./Image/Icons/add.png"><span>Add New Season</span></button>
+                <button id="add-episode" type="button" class="btn btn-primary" data-toggle="modal" data-target="#add-episode-modal"><img src="./Image/Icons/add.png"><span>Add New Episode</span></button>
+                <button id="add-season" type="button" class="btn btn-primary" data-toggle="modal" data-target="#delete-season-modal"><img src="./Image/Icons/delete.png"><span>Delete Season</span></button>
+                <button id="add-episode" type="button" class="btn btn-primary" data-toggle="modal" data-target="#delete-episode-modal"><img src="./Image/Icons/delete.png"><span>Delete Episode</span></button>
             </div>
         </div>        
         <div class="episodes-anime">
@@ -145,18 +149,151 @@
             </div>
         </div>
     </div>
-    <script>
-        function scrollCarouselAnimes(offset) {
-            const carousel = document.querySelector(".carouselA");
-            carousel.scrollBy({ left: offset, behavior: "smooth" });
-        }
-
-        function scrollCarouselEpisodes(offset) {
-            const carousel = document.querySelector(".carouselE");
-            carousel.scrollBy({ left: offset, behavior: "smooth" });
-        }
-
-    </script>
+    <!-- Add Season Modal -->
+    <div id="add-season-modal" class="modal fade" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form>
+                    <div class="modal-header">
+                        <h3 class="modal-title">Add New Season</h3>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label>Season Name</label>
+                            <input type="text" class="form-control" placeholder="Enter Season Name">
+                        </div>
+                        <div class="form-group">
+                            <label>Release Date</label>
+                            <input type="date" class="form-control" placeholder="Release Date">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Add Season</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Add Episode Modal -->
+    <div id="add-episode-modal" class="modal fade" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form>
+                    <div class="modal-header">
+                        <h3 class="modal-title">Add New Episode</h3>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label>Episode Name</label>
+                            <input type="text" class="form-control" placeholder="Enter Episode Name">
+                        </div>
+                        <div class="form-group">
+                            <label>Image URL</label>
+                            <input type="text" class="form-control" placeholder="Image">
+                        </div>
+                        <div class="form-group">
+                            <label>Season Name:</label>
+                            <input type="text" class="form-control" placeholder="Enter Season Name">
+                        </div>
+                        <div class="form-group">
+                            <label>Release Date</label>
+                            <input type="date" class="form-control" placeholder="Release Date">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Add Episode</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Delete Season Modal -->
+    <div id="delete-season-modal" class="modal fade" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form>
+                    <div class="modal-header">
+                        <h3 class="modal-title">Delete Season</h3>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label>Season Name</label>
+                            <input type="text" class="form-control" placeholder="Enter Season Name">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Delete Season</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Delete Season Modal -->
+    <div id="delete-season-modal" class="modal fade" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form>
+                    <div class="modal-header">
+                        <h3 class="modal-title">Delete Season</h3>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label>Season Name</label>
+                            <input type="text" class="form-control" placeholder="Enter Season Name">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Delete Season</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Delete Episode Modal -->
+    <div id="delete-episode-modal" class="modal fade" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form>
+                    <div class="modal-header">
+                        <h3 class="modal-title">Delete Episode</h3>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label>Episode Name</label>
+                            <input type="text" class="form-control" placeholder="Enter Episode Name">
+                        </div>
+                        <div class="form-group">
+                            <label>Season Name</label>
+                            <input type="text" class="form-control" placeholder="Enter Season Name">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Delete Episode</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>

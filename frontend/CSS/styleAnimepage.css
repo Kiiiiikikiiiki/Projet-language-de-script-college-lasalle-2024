@@ -52,6 +52,12 @@ h1, h2, h3, h4, h5, h6{
     font-size: 24px;
 }
 
+.description-anime button{
+    border-bottom: #333 1px solid;
+    margin:0px 25px 0px 25px;
+    font-size: 16px;
+}
+
 .image-anime{
     display: block;
     width: 20%;
