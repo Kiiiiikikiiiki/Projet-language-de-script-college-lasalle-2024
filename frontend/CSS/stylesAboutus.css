@@ -7,11 +7,12 @@
     height: 100vh;
     width: 100vw;
     box-sizing: border-box;
+    margin-bottom: 20px;
 }
 
 *{
     box-sizing: border-box;
-    
+    overflow-x: hidden;
 }
 
 
@@ -38,6 +39,7 @@ h1, h2, h3, h4, h5, h6{
     box-sizing: border-box;
     margin: 50px;
     text-align: center;
+    overflow: hidden;
 }
 
 .luffy p, .law p {
@@ -62,6 +64,17 @@ h1, h2, h3, h4, h5, h6{
     width: 100%;
     height: 100%;
     z-index: -1;
+}
+
+.graphique{
+    display: flex;
+    padding: 20px;
+    justify-content: center;
+}
+
+.graphique img{
+    width: 50%;
+    height: auto;
 }
 
 
