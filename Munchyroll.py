@@ -37,8 +37,12 @@ def login():
 def dashboard(member_id):
     conn = obtenir_connection()
     animeList = AnimeDAO.getAll_anime(conn)
+    newEpisode = EpisodeDAO.getEpisodesFromToday(conn)
     fermer_connection(conn)
-    return render_template('Dashboard.html', member_id=member_id, animeList=animeList)
+    for anime in animeList:
+        print(anime.anime_name)
+    return render_template('Dashboard.html', member_id=member_id, animeList=animeList, newEpisode=newEpisode,
+                           getConn=obtenir_connection, getSeason=SeasonDAO.get_season)
 
 # @app.route('/favAnimes')
 # def favAnimes():
@@ -180,8 +184,51 @@ def episodePage(episode_id, member_id):
                            season_name=season.season_name, anime_name=season.getAnime_name(),
                            getUsername=MemberDAO.get_member_username, getConn=obtenir_connection)
     
+@app.route('/add_like_episode/<episode_id>/<member_id>', methods=['GET'])
+def add_like_episode(episode_id, member_id):
+    conn = obtenir_connection()
+    episode = EpisodeDAO.get_episode(conn, episode_id)
+    episode.nb_like += 1
+    EpisodeDAO.update_episode(conn, episode)
+    # TODO : Add a new table in database that is MemberLikeEpisode so that we can know which episode is liked by which member
+    # TODO : Add a new table in database that is MemberDislikeEpisode so that we can know which episode is disliked by which member
+    # TODO : When we like an episode it remove if exist in MemberDislikeEpisode and vice versa
+    fermer_connection(conn)
+    return redirect(url_for('episodePage', episode_id=episode_id, member_id=member_id))
+
+@app.route('/add_dislike_episode/<episode_id>/<member_id>', methods=['GET'])
+def add_dislike_episode(episode_id, member_id):
+    conn = obtenir_connection()
+    episode = EpisodeDAO.get_episode(conn, episode_id)
+    episode.nb_dislike += 1
+    EpisodeDAO.update_episode(conn, episode)
+    fermer_connection(conn)
+    return redirect(url_for('episodePage', episode_id=episode_id, member_id=member_id))
+
+@app.route('/add_like_comment/<comment_id>/<member_id>/<episode_id>', methods=['GET'])
+def add_like_comment(comment_id, member_id, episode_id):
+    conn = obtenir_connection()
+    comment = CommentDAO.get_comment_by_id(conn, comment_id)
+    comment.nb_like += 1
+    CommentDAO.update_comment(conn, comment)
+    # TODO : Add a new table in database that is MemberLikeEpisode so that we can know which episode is liked by which member
+    # TODO : Add a new table in database that is MemberDislikeEpisode so that we can know which episode is disliked by which member
+    # TODO : When we like an episode it remove if exist in MemberDislikeEpisode and vice versa
+    fermer_connection(conn)
+    return redirect(url_for('episodePage', episode_id=episode_id, member_id=member_id))
+
+@app.route('/add_dislike_comment/<comment_id>/<member_id>/<episode_id>', methods=['GET'])
+def add_dislike_comment(comment_id, member_id, episode_id):
+    conn = obtenir_connection()
+    comment = CommentDAO.get_comment_by_id(conn, comment_id)
+    comment.nb_dislike += 1
+    CommentDAO.update_comment(conn, comment)
+    fermer_connection(conn)
+    return redirect(url_for('episodePage', episode_id=episode_id, member_id=member_id))
+    
 @app.route('/episodePageAdmin/<episode_id>')
 def episodePageAdmin(episode_id):
+    
     conn = obtenir_connection()
     episode = EpisodeDAO.get_episode(conn, episode_id)
     season = SeasonDAO.get_season(conn, episode.getSeason_id())
