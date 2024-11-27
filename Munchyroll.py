@@ -8,6 +8,8 @@ from backend.Database.AnimeDAO import AnimeDAO
 from backend.Database.EpisodeDAO import EpisodeDAO
 from backend.Database.SeasonDAO import SeasonDAO
 from backend.Database.CommentDAO import CommentDAO
+import pandas as pd
+import matplotlib.pyplot as plt
 
 app = Flask(__name__, template_folder='frontend', static_folder='frontend')
 
@@ -48,7 +50,27 @@ def dashboard(member_id):
 
 @app.route('/aboutUs')
 def aboutUs():
-    return render_template('AboutUs.html')
+    conn = obtenir_connection()
+    df = pd.read_sql_query("SELECT * FROM animeType", conn)
+    fermer_connection(conn)
+    
+    anime_counts = df.groupby('type').size().reset_index(name='count')
+
+    plt.figure(figsize=(10, 6))
+    plt.bar(anime_counts['type'], anime_counts['count'], color='blue')
+    plt.title('Type of Anime')
+    plt.xlabel('Anime Type')
+    plt.ylabel('Count')
+    plt.xticks(rotation=45) 
+    plt.tight_layout()
+    
+    
+    plotpath = 'frontend/Image/graphic.png'
+    plt.savefig(plotpath)
+    plt.close()
+    
+    
+    return render_template('AboutUs.html', plotpath=plotpath)
 
 @app.route('/animeList')
 def animeList():
