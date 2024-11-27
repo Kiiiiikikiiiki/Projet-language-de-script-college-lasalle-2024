@@ -45,69 +45,15 @@
                 <button class="prev-episodes" onclick="scrollCarouselEpisodes(-300)">◀</button>
                 <div class="carouselE">
                     <ul>
-                        <li>
-                            <div class="image-container">
-                                <a href="/episodePage" target="contentFrame"><img src="/frontend/Image/Animes/anime4/s1/ep1.png"></a>
-                                <h4>One Piece</h4>
-                                <h4>E-FMI3 - Revelación impactante. Un gran benefactor: Kuma</h4>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="image-container">
-                                <a href="./Episodes.html" target="contentFrame"><img src="/frontend/Image/Animes/anime4/s1/ep1.png"></a>
-                                <h4>One Piece</h4>
-                                <h4>E-FMI3 - Revelación impactante. Un gran benefactor: Kuma</h4>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="image-container">
-                                <a href="./Episodes.html" target="contentFrame"><img src="/frontend/Image/Animes/anime4/s1/ep1.png"></a>
-                                <h4>One Piece</h4>
-                                <h4>E-FMI3 - Revelación impactante. Un gran benefactor: Kuma</h4>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="image-container">
-                                <a href="./Episodes.html" target="contentFrame"><img src="/frontend/Image/Animes/anime4/s1/ep1.png"></a>
-                                <h4>One Piece</h4>
-                                <h4>E-FMI3 - Revelación impactante. Un gran benefactor: Kuma</h4>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="image-container">
-                                <a href="./Episodes.html" target="contentFrame"><img src="/frontend/Image/Animes/anime4/s1/ep1.png"></a>
-                                <h4>One Piece</h4>
-                                <h4>E-FMI3 - Revelación impactante. Un gran benefactor: Kuma</h4>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="image-container">
-                                <a href="./Episodes.html" target="contentFrame"><img src="/frontend/Image/Animes/anime4/s1/ep1.png"></a>
-                                <h4>One Piece</h4>
-                                <h4>E-FMI3 - Revelación impactante. Un gran benefactor: Kuma</h4>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="image-container">
-                                <a href="./Episodes.html" target="contentFrame"><img src="/frontend/Image/Animes/anime4/s1/ep1.png"></a>
-                                <h4>One Piece</h4>
-                                <h4>E-FMI3 - Revelación impactante. Un gran benefactor: Kuma</h4>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="image-container">
-                                <a href="./Episodes.html" target="contentFrame"><img src="/frontend/Image/Animes/anime4/s1/ep1.png"></a>
-                                <h4>One Piece</h4>
-                                <h4>E-FMI3 - Revelación impactante. Un gran benefactor: Kuma</h4>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="image-container">
-                                <a href="./Episodes.html" target="contentFrame"><img src="/frontend/Image/Animes/anime4/s1/ep1.png"></a>
-                                <h4>One Piece</h4>
-                                <h4>E-FMI3 - Revelación impactante. Un gran benefactor: Kuma</h4>
-                            </div>
-                        </li>
+                        {% for episode in newEpisode %}
+                            <li>
+                                <div class="image-container">
+                                    <a href="/episodePage/{{ episode.getEpisode_id()}}/{{ member_id }}" target="contentFrame"><img src="/frontend/{{ episode.picture_url[1:] }}"></a>
+                                    <h4>{{ getSeason(getConn(), episode.getSeason_id()).getAnime_name()}}</h4>
+                                    <h4>{{ episode.episode_name }}</h4>
+                                </div>
+                            </li>
+                        {% endfor %}
                     </ul>
                 </div>
                 <button class="next-episodes" onclick="scrollCarouselEpisodes(300)">▶</button>

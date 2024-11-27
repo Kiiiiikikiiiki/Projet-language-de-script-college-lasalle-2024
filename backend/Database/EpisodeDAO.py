@@ -124,3 +124,22 @@ class EpisodeDAO:
         except sqlite3.Error as e:
             print(e)
             return []
+        
+    def getEpisodesFromToday(conn: sqlite3.Connection) -> list[Episode]:
+        """
+        Gets all episodes from the database that have been released today
+
+        Args:
+            conn (sqlite3.Connection): The connection to the database
+        Returns:
+            list[Episode]: A list of all episodes
+        """
+        try:
+            cursor = conn.cursor()
+            cursor.execute("SELECT * FROM episode WHERE DATE(release_date) = ? ORDER BY release_date DESC",
+                           (datetime.date.today().strftime("%Y-%m-%d"),))
+            episodeList = cursor.fetchall()
+            return [EpisodeDAO.get_episode(conn, row[0]) for row in episodeList]
+        except sqlite3.Error as e:
+            print(e)
+            return []
