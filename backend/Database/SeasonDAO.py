@@ -1,6 +1,7 @@
 import sqlite3
 import datetime
 from backend.Class_Domain.Season import Season
+from backend.Database.EpisodeDAO import EpisodeDAO
 
 class SeasonDAO:
     
@@ -65,3 +66,33 @@ class SeasonDAO:
         except sqlite3.Error as e:
             print(e)
             return False
+        
+    def get_season(conn: sqlite3.Connection, season_id: int) -> Season:
+        try:
+            cursor = conn.cursor()
+            cursor.execute("SELECT * FROM season WHERE season_id = ?", (season_id,))
+            season = cursor.fetchone()
+            return Season(season[1], EpisodeDAO.get_episodes_by_season_id(conn, season_id), season[3], season[4], season[0], season[2])
+        except sqlite3.Error as e:
+            print(e)
+            return None
+        
+    def get_seasons_by_anime_name(conn: sqlite3.Connection, anime_name: str) -> list[Season]:
+        try:
+            cursor = conn.cursor()
+            cursor.execute("SELECT * FROM season WHERE anime_name = ?", (anime_name,))
+            seasons = cursor.fetchall()
+            return [SeasonDAO.get_season(conn, season[0]) for season in seasons]
+        except sqlite3.Error as e:
+            print(e)
+            return None
+        
+    def getAll_seasons(conn: sqlite3.Connection) -> list[Season]:
+        try:
+            cursor = conn.cursor()
+            cursor.execute("SELECT * FROM season")
+            seasons = cursor.fetchall()
+            return [SeasonDAO.get_season(conn, season[0]) for season in seasons]
+        except sqlite3.Error as e:
+            print(e)
+            return None

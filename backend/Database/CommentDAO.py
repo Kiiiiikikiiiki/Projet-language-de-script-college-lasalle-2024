@@ -116,5 +116,55 @@ class CommentDAO:
         except sqlite3.Error as e:
             print(e)
             return []
+        
+    def get_comments_by_episode_id(conn: sqlite3.Connection, episode_id: int) -> list:
+        """
+        Gets the comments of an episode from the database
+
+        Args:
+            conn (sqlite3.Connection): The connection to the database
+            episode_id (int): The id of the episode
+        Returns:
+            list: The list of comments
+        """
+        try:
+            cursor = conn.cursor()
+            cursor.execute("SELECT * FROM comment WHERE episode_id = ?", (episode_id,))
+            rows = cursor.fetchall()
+            if len(rows) > 0:
+                comments = []
+                for row in rows:
+                    comments.append(CommentDAO.get_comment_by_id(conn, row[0]))
+                return comments
+            else:
+                return []
+        except sqlite3.Error as e:
+            print(e)
+            return []
+        
+    def get_comments_by_member_id(conn: sqlite3.Connection, member_id: int) -> list:
+        """
+        Gets the comments of a member from the database
+
+        Args:
+            conn (sqlite3.Connection): The connection to the database
+            member_id (int): The id of the member
+        Returns:
+            list: The list of comments
+        """
+        try:
+            cursor = conn.cursor()
+            cursor.execute("SELECT * FROM comment WHERE member_id = ?", (member_id,))
+            rows = cursor.fetchall()
+            if len(rows) > 0:
+                comments = []
+                for row in rows:
+                    comments.append(CommentDAO.get_comment_by_id(conn, row[0]))
+                return comments
+            else:
+                return []
+        except sqlite3.Error as e:
+            print(e)
+            return []
     
     

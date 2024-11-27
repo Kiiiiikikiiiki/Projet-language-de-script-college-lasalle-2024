@@ -1,6 +1,7 @@
 import sqlite3
 import datetime
 from backend.Class_Domain.Episode import Episode
+from backend.Database.CommentDAO import CommentDAO
 
 class EpisodeDAO:
     
@@ -68,3 +69,58 @@ class EpisodeDAO:
         except sqlite3.Error as e:        
             print(e)
             return False
+        
+    def get_episode(conn: sqlite3.Connection, episode_id: int) -> Episode:
+        """
+        Gets an episode from the database
+
+        Args:
+            conn (sqlite3.Connection): The connection to the database
+            episode_id (int): The id of the episode to get
+        Returns:
+            Episode: The episode
+        """
+        try:
+            cursor = conn.cursor()
+            cursor.execute("SELECT * FROM episode WHERE episode_id = ?", (episode_id,))
+            row = cursor.fetchone()
+            return Episode(row[1], CommentDAO.get_comments_by_episode_id(conn, episode_id), row[2], row[3], row[4], row[5], row[7], row[8], row[0], row[6])
+        except sqlite3.Error as e:
+            print(e)
+            return None
+        
+    def get_episodes_by_season_id(conn: sqlite3.Connection, season_id: int) -> list[Episode]:
+        """
+        Gets all episodes from the database
+
+        Args:
+            conn (sqlite3.Connection): The connection to the database
+        Returns:
+            list[Episode]: A list of all episodes
+        """
+        try:
+            cursor = conn.cursor()
+            cursor.execute("SELECT * FROM episode WHERE season_id = ?", (season_id,))
+            episodeList = cursor.fetchall()
+            return [EpisodeDAO.get_episode(conn, row[0]) for row in episodeList]
+        except sqlite3.Error as e:
+            print(e)
+            return []
+        
+    def getAll_episodes(conn: sqlite3.Connection) -> list[Episode]:
+        """
+        Gets all episodes from the database
+
+        Args:
+            conn (sqlite3.Connection): The connection to the database
+        Returns:
+            list[Episode]: A list of all episodes
+        """
+        try:
+            cursor = conn.cursor()
+            cursor.execute("SELECT * FROM episode")
+            episodeList = cursor.fetchall()
+            return [EpisodeDAO.get_episode(conn, row[0]) for row in episodeList]
+        except sqlite3.Error as e:
+            print(e)
+            return []

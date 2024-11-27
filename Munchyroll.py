@@ -57,13 +57,9 @@ def delete_user(member_id):
 def search_user():
     search = request.args.get('search-user')
     conn = obtenir_connection()
-    users = MemberDAO.getAll_Members(conn)
-    listtosend = []
+    users = MemberDAO.searchMember(conn, search)
     fermer_connection(conn)
-    for user in users:
-        if user.username.lower().startswith(search.lower()):
-            listtosend.append(user)
-    return render_template('Users.html', users=listtosend)
+    return render_template('Users.html', users=users)
 
 @app.route('/animePage')
 def animePage():

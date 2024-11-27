@@ -1,6 +1,8 @@
 import sqlite3
 import datetime
 from backend.Class_Domain.Anime import Anime
+from backend.Database.SeasonDAO import SeasonDAO
+
 
 class AnimeDAO:
     
@@ -75,3 +77,44 @@ class AnimeDAO:
         except sqlite3.Error as e:
             print(e)
             return False
+        
+    def get_anime(conn: sqlite3.Connection, anime_name: str) -> Anime:
+        try:
+            cursor = conn.cursor()
+            cursor.execute("SELECT * FROM anime WHERE anime_name = ?", (anime_name,))
+            row = cursor.fetchone()
+            
+            return Anime(row[0], row[1], SeasonDAO.get_seasons_by_anime_name(conn, anime_name), row[2], AnimeDAO.get_anime_types(conn, anime_name), row[3], row[4], row[5])
+        except sqlite3.Error as e:
+            print(e)
+            return None
+        
+    def getAll_anime(conn: sqlite3.Connection) -> list[Anime]:
+        try:
+            cursor = conn.cursor()
+            cursor.execute("SELECT * FROM anime")
+            animeList = cursor.fetchall()
+            return [AnimeDAO.get_anime(conn, row[0]) for row in animeList]
+        except sqlite3.Error as e:
+            print(e)
+            return []   
+        
+    def get_anime_types(conn: sqlite3.Connection, anime_name: str) -> list[str]:
+        try:
+            cursor = conn.cursor()
+            cursor.execute("SELECT type FROM animeType WHERE anime_name = ?", (anime_name,))
+            typeList = cursor.fetchall()
+            return [row[0] for row in typeList]
+        except sqlite3.Error as e:
+            print(e)
+            return []
+        
+    def search_anime(conn: sqlite3.Connection, searchElement: str) -> list[Anime]:
+        try:
+            cursor = conn.cursor()
+            cursor.execute("SELECT * FROM anime WHERE anime_name LIKE ?", (f"{searchElement}%",))
+            animeList = cursor.fetchall()
+            return [AnimeDAO.get_anime(conn, row[0]) for row in animeList]
+        except sqlite3.Error as e:
+            print(e)
+            return []

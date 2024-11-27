@@ -161,3 +161,13 @@ class MemberDAO:
         except sqlite3.Error as e:
             print(e)
             return False
+        
+    def searchMember(conn: sqlite3.Connection, searchElement: str) -> list[Member]:
+        try:
+            cursor = conn.cursor()
+            cursor.execute("SELECT * FROM member WHERE username LIKE ?", (f"{searchElement}%",))
+            memberList = cursor.fetchall()
+            return [MemberDAO.get_member(conn, row[0]) for row in memberList]
+        except sqlite3.Error as e:
+            print(e)
+            return []
