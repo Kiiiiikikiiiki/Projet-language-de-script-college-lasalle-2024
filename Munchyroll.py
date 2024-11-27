@@ -40,8 +40,30 @@ def animeList():
     return render_template('AnimeList.html')
 
 @app.route('/UserList')
-def UserList():
-    return render_template('Users.html')
+def userList():
+    conn = obtenir_connection()
+    users = MemberDAO.getAll_Members(conn)
+    fermer_connection(conn)
+    return render_template('Users.html', users=users)
+
+@app.route('/deleteUser/<member_id>', methods=['POST'])
+def delete_user(member_id):
+    conn = obtenir_connection()
+    MemberDAO.delete_member(conn, member_id)
+    fermer_connection(conn)
+    return redirect(url_for('userList'))
+
+@app.route('/search_user', methods=['GET'])
+def search_user():
+    search = request.args.get('search-user')
+    conn = obtenir_connection()
+    users = MemberDAO.getAll_Members(conn)
+    listtosend = []
+    fermer_connection(conn)
+    for user in users:
+        if user.username.lower().startswith(search.lower()):
+            listtosend.append(user)
+    return render_template('Users.html', users=listtosend)
 
 @app.route('/animePage')
 def animePage():

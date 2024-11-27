@@ -20,7 +20,7 @@
                 <div class="row">
                     <h1>Manage <b>Users</b></h1>
                     <div class="search-container">
-                        <form action="#" method="get" class="serch-user">
+                        <form action="{{ url_for('search_user') }}" method="get" class="serch-user">
                             <input type="text" placeholder="Search Username..." name="search-user" id="search-user">
                             <button type="submit" class="search-btn"><img src="frontend/Image/Icons/search.png" alt="search icon"></button>
                         </form>
@@ -32,26 +32,18 @@
                 <table>
                     <thead>
                     <th>Username</th>
-                    <th>PasswordHash</th>
                     <th>Actions</th>
                     </thead>
                     <tbody>
-                        <tr>
+                        {% for user in users %}
+                            <tr>
 
-                            <td>John</td>
-                            <td>**************</td>
-                            <td>
-                                <a title="Delete" data-toggle="modal" data-target="#delete-user-modal"><img src="frontend/Image/Icons/delete.png"></a>
-                            </td>
-                        </tr>
-                        <tr>
-
-                            <td>Juan</td>
-                            <td>**************</td>
-                            <td>
-                                <a title="Delete" data-toggle="modal" data-target="#delete-user-modal"><img src="frontend/Image/Icons/delete.png"></a>
-                            </td>
-                        </tr>
+                                <td>{{ user.username }}</td>
+                                <td>
+                                    <a title="Delete" data-toggle="modal" data-target="#delete-user-modal" data-member-id="{{ user.getMember_id() }}"><img src="frontend/Image/Icons/delete.png"></a>
+                                </td>
+                            </tr>
+                        {% endfor %}
                     </tbody>
                 </table>
             </div>
@@ -62,7 +54,7 @@
     <div id="delete-user-modal" class="modal fade" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <form>
+                <form id="delete-user-form" method="POST" action="{{url_for('delete_user', member_id='')}}">
                     <div class="modal-header">
                         <h3 class="modal-title">Delete User</h3>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -81,5 +73,15 @@
             </div>
         </div>
     </div>
+
+    <script>
+        $(document).on('click', '[data-target="#delete-user-modal"]', function () {
+            var memberId = $(this).data('member-id'); // Retrieve the member ID
+            var formAction = "/deleteUser/" + memberId; // Construct the action URL
+            $('#delete-user-form').attr('action', formAction); // Update the form action
+        });
+    </script>
+    
+
 </body>
 </html>

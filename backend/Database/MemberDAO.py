@@ -84,6 +84,15 @@ class MemberDAO:
         except sqlite3.Error as e:
             print(e)
             
+    def getAll_Members(conn: sqlite3.Connection) -> list:
+        try:
+            cursor = conn.cursor()
+            cursor.execute("SELECT * FROM member")
+            memberList = cursor.fetchall()
+            return [MemberDAO.get_member(conn, row[0]) for row in memberList]
+        except sqlite3.Error as e:
+            print(e)
+            
     def get_anime_list(conn: sqlite3.Connection, member_id: int) -> list:
         """
         Gets the anime list of a member from the database
