@@ -37,11 +37,13 @@
                                 <td><h4>{{ getUsername(getConn(), comment.getMember_id()) }}</h4></td>
                                 <td>
                                     <p>{{ comment.comment_content }}</p><br/>
-                                    <button class="like">👍<span id="nb-likes">{{ comment.nb_like }}</span></button>
-                                    <button class="dislike">👎<span id="nb-dislikes">{{ comment.nb_dislike }}</span></button id="nb-dislikes">
-                                    <form action="{{ url_for('delete_comment', comment_id=comment.getComment_id(), episode_id=episode.getEpisode_id()) }}" method="POST">
+                                    <div class="btn-section">
+                                        <button class="like">👍<span id="nb-likes">{{ comment.nb_like }}</span></button>
+                                        <button class="dislike">👎<span id="nb-dislikes">{{ comment.nb_dislike }}</span></button>
+                                        <form action="{{ url_for('delete_comment', comment_id=comment.getComment_id(), episode_id=episode.getEpisode_id()) }}" method="POST">
                                         <button class="delete-btn" type="submit">Delete Comment</button>
                                     </form>
+                                    </div>
                                 </td>
                             </tr>
                         {% endfor %}

@@ -27,7 +27,7 @@
                             <div class="image-container">
                                 <a href="/animePageMember/{{ anime.anime_name }}/{{ member_id }}" target="contentFrame"><img src="/frontend{{ anime.picture_url[1:] }}" alt="{{ anime.anime_name }}"></a>
                                 <button type="button" class="btn btn-primary add-anime" data-toggle="modal"
-                                    data-target="#add-anime-modal">
+                                    data-target="#add-anime-modal" data-anime-name="{{ anime.anime_name }}" data-member-id="{{ member_id }}">
                                     <img src="/frontend/Image/Icons/add.png" alt="add icon">
                                 </button>
                             </div>
@@ -64,7 +64,7 @@
     <div id="add-anime-modal" class="modal fade" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <form>
+                <form id="add-anime-form" method="POST" action="{{url_for('addFavAnime', member_id='', anime_name='')}}">
                     <div class="modal-header">
                         <h3 class="modal-title">Add Anime</h3>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -92,6 +92,14 @@
             const carousel = document.querySelector(".carouselE");
             carousel.scrollBy({ left: offset, behavior: "smooth" });
         }
+
+        $(document).on('click', '[data-target="#add-anime-modal"]', function () {
+            var animeName = $(this).data('anime-name');
+            var member_id = $(this).data('member-id');
+            console.log("member_id : ",member_id);
+            var formAction = "/addFavAnime/" + member_id + "/" + animeName; 
+            $('#add-anime-form').attr('action', formAction); 
+        });
 
     </script>
 </body>

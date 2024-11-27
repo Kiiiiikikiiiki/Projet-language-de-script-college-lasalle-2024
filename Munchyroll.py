@@ -278,6 +278,14 @@ def favAnimes(member_id):
     fermer_connection(conn)
     return render_template('Animes.html', favAnime=favAnime, member_id=member_id)
 
+@app.route('/addFavAnime/<member_id>/<anime_name>', methods=['POST'])
+def addFavAnime(member_id, anime_name):
+    conn = obtenir_connection()
+    MemberDAO.add_anime_to_member(conn, member_id, anime_name)
+    fermer_connection(conn)
+    return redirect(url_for('favAnimes', member_id=member_id))
+
+
 @app.route('/deleteFavAnime/<member_id>/<anime_name>', methods=['POST'])
 def deleteFavAnime(member_id, anime_name):
     conn = obtenir_connection()
