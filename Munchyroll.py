@@ -124,6 +124,21 @@ def add_season(anime_name):
         SeasonDAO.add_season(conn, season_name, anime_name, season_release_date)
         fermer_connection(conn)
         return redirect(url_for('animePage', anime_name=anime_name))
+    
+@app.route('/addEpisode/<anime_name>', methods=['POST', 'GET'])
+def add_episode( anime_name):
+    if request.method == 'POST':
+        episode_name = request.form['episode_name']
+        episode_reiting = 0.0
+        episode_like = 0
+        episode_dislike = 0
+        episode_image = request.form['episode_image']
+        episode_season_id = 1
+        episode_release_date = request.form['episode_release_date']
+        conn = obtenir_connection()
+        EpisodeDAO.add_episode(conn, episode_name, episode_reiting, episode_like, episode_dislike, episode_image, episode_season_id, episode_release_date)
+        fermer_connection(conn)
+        return redirect(url_for('animePage', anime_name=anime_name))
         
 
 @app.route('/animePageMember/<anime_name>/<member_id>')
