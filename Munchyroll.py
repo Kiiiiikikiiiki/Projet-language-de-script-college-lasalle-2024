@@ -3,6 +3,7 @@ from backend.Database.dbFunc import obtenir_connection, fermer_connection
 from backend.Database.AdminDAO import AdminDAO
 from backend.Database.MemberDAO import MemberDAO
 from backend.Class_Domain.User import User
+from backend.Database.AnimeDAO import AnimeDAO
 
 app = Flask(__name__, template_folder='frontend', static_folder='frontend')
 
@@ -41,7 +42,31 @@ def aboutUs():
 
 @app.route('/animeList')
 def animeList():
-    return render_template('AnimeList.html')
+    conn = obtenir_connection()
+    animes = AnimeDAO.getAll_anime(conn)
+    fermer_connection(conn)
+    return render_template('AnimeList.html', animes=animes)
+
+@app.route('/addAnime', methods=['POST', 'GET'])
+def add_anime():
+    if request.method == 'POST':
+        anime_name = request.form['anime_name']
+        anime_desc = request.form['anime_description']
+        anime_raiting = request.form['anime_raiting']
+        anime_types = request.form['anime_types'].split(',')
+        anime_image = request.form['anime_image']
+        anime_release_date = request.form['anime_release_date']
+        conn = obtenir_connection()
+        AnimeDAO.add_anime(conn, anime_name, anime_desc, anime_raiting, anime_types, anime_image, anime_release_date)
+        fermer_connection(conn)
+        return redirect(url_for('animeList'))
+
+@app.route('/deleteAnime/<anime_name>', methods=['POST'])
+def delete_anime(anime_name):
+    conn = obtenir_connection()
+    AnimeDAO.delete_anime(conn, anime_name)
+    fermer_connection(conn)
+    return redirect(url_for('animeList'))
 
 @app.route('/UserList')
 def userList():

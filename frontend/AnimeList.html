@@ -41,25 +41,17 @@
                     <th>Actions</th>
                     </thead>
                     <tbody>
+                        {% for anime in animes %}
                         <tr>
-
-                            <td><a href="/animePage">One Piece</a></td>
-                            <td>13</td>
-                            <td>5</td>
-                            <td>2023-01-01</td>
+                            <td><a href="/animePage">{{ anime.anime_name }}</a></td>
+                            <td>{{ anime.seasons | length }}</td>
+                            <td>{{ anime.rating }}</td>
+                            <td>{{ anime.release_date }}</td>
                             <td>
-                                <a title="Delete" data-toggle="modal" data-target="#delete-anime-modal"><img src="frontend/Image/Icons/delete.png"></a>
+                                <a title="Delete" data-toggle="modal" data-target="#delete-anime-modal" data-anime-name="{{ anime.anime_name }}"><img src="frontend/Image/Icons/delete.png"></a>
                             </td>
                         </tr>
-                        <tr>
-                            <td><a href="./AnimePage.html">Attack on Titan</a></td>
-                            <td>5</td>
-                            <td>4.5</td>
-                            <td>2023-01-01</td>
-                            <td>
-                                <a title="Delete" data-toggle="modal" data-target="#delete-anime-modal"><img src="frontend/Image/Icons/delete.png"></a>
-                            </td>
-                        </tr>
+                        {% endfor %}
                     </tbody>
                 </table>
             </div>
@@ -69,7 +61,7 @@
     <div id="add-anime-modal" class="modal fade" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <form>
+                <form id="add-anime-form" method="POST" action="{{url_for('add_anime')}}">
                     <div class="modal-header">
                         <h3 class="modal-title">Add New Anime</h3>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -79,27 +71,27 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <label>Anime Name</label>
-                            <input type="text" class="form-control" placeholder="Enter Anime Name">
+                            <input type="text" name="anime_name" class="form-control" placeholder="Enter Anime Name">
                         </div>
                         <div class="form-group">
                             <label>Anime Description</label>
-                            <input type="text" class="form-control" placeholder="Enter Anime Description" textarea>
+                            <input type="text" name="anime_description" class="form-control" placeholder="Enter Anime Description" textarea>
                         </div>
                         <div class="form-group">
                             <label>Raiting</label>
-                            <input type="number" min="0" max="5" step="0.1" class="form-control" placeholder="Anime Raiting">
+                            <input type="number" name="anime_raiting" min="0" max="5" step="0.1" class="form-control" placeholder="Anime Raiting">
                         </div>
                         <div class="form-group">
                             <label>Types: </label>
-                            <input type="text" class="form-control" placeholder="Enter Anime Types">
+                            <input type="text" name="anime_types" class="form-control" placeholder="Enter Anime Types">
                         </div>
                         <div class="form-group">
                             <label>Image URL</label>
-                            <input type="text" class="form-control" placeholder="Image">
+                            <input type="text" name="anime_image" class="form-control" placeholder="Image">
                         </div>
                         <div class="form-group">
                             <label>Release Date</label>
-                            <input type="date" class="form-control" placeholder="Release Date">
+                            <input type="date" name="anime_release_date" class="form-control" placeholder="Release Date">
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -114,7 +106,7 @@
     <div id="delete-anime-modal" class="modal fade" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <form>
+                <form id="delete-anime-form" method="POST" action="{{url_for('delete_anime', anime_name='')}}">
                     <div class="modal-header">
                         <h3 class="modal-title">Delete Anime</h3>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -133,5 +125,12 @@
             </div>
         </div>
     </div>
+    <script>
+        $(document).on('click', '[data-target="#delete-anime-modal"]', function () {
+            var animeName = $(this).data('anime-name');
+            var formAction = "/deleteAnime/" + animeName; 
+            $('#delete-anime-form').attr('action', formAction); 
+        });
+    </script>
 </body>
 </html>
