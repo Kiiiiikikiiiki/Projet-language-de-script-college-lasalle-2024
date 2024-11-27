@@ -15,17 +15,21 @@ def login():
     if request.method == 'POST':
         name = request.form['name']
         password = request.form['password']
-        if AdminDAO.verifyAdmin(obtenir_connection(), name, password):
+        conn = obtenir_connection()
+        if AdminDAO.verifyAdmin(conn, name, password):
+            fermer_connection(conn)
             return render_template('indexAdmin.html')
-        elif MemberDAO.verifyMember(obtenir_connection(), name, password):
-            return render_template('index.html')
+        elif MemberDAO.verifyMember(conn, name, password):
+            logIn_member = MemberDAO.get_member_by_username(conn, name)
+            fermer_connection(conn)
+            return render_template('index.html', logIn_member=logIn_member)
         else:
             return render_template('login.html', error='Invalid username or password')
     return render_template('login.html')
 
-@app.route('/dashboard')
-def dashboard():
-    return render_template('Dashboard.html')
+@app.route('/dashboard/<member_id>', methods=['GET', 'POST'])
+def dashboard(member_id):
+    return render_template('Dashboard.html', member_id=member_id)
 
 @app.route('/favAnimes')
 def favAnimes():

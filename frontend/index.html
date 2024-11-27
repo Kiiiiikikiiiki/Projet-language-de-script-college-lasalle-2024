@@ -15,7 +15,7 @@
             <li>
                 <img src="frontend/Image/LogoApp.webp" alt="logo" width="100px" height="100px">
             </li>
-            <li><a href="/dashboard" target="contentFrame">Home</a></li>
+            <li><a href="/dashboard/{{ logIn_member.getMember_id() }}" target="contentFrame">Home</a></li>
             <li><a href="/favAnimes" target="contentFrame">Favorite Animes</a></li>
             <li><a href="/aboutUs" target="contentFrame">About Us</a></li>
             <li>
@@ -32,7 +32,7 @@
         </ul>
     </div>
     <div class="container">
-        <iframe src="/dashboard" name="contentFrame" id="contentFrame"></iframe>
+        <iframe src="/dashboard/{{ logIn_member.getMember_id() }}" name="contentFrame" id="contentFrame"></iframe>
     </div>
 </body>
 

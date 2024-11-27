@@ -83,6 +83,20 @@ class MemberDAO:
                 return None
         except sqlite3.Error as e:
             print(e)
+          
+    def get_member_by_username(conn: sqlite3.Connection, username: str) -> Member:
+        try:
+            cursor = conn.cursor()
+            cursor.execute("SELECT * FROM member WHERE username = ?", (username,))
+            memberRow = cursor.fetchone()    
+            if memberRow is not None:
+                animeList = MemberDAO.get_anime_list(conn, memberRow[0])
+                return Member(memberRow[1], memberRow[2], animeList, memberRow[3], MemberDAO.get_comment_list(conn, memberRow[0]), int(memberRow[0]))
+            else:
+                return None
+        except sqlite3.Error as e:
+            print(e)     
+            return None 
             
     def getAll_Members(conn: sqlite3.Connection) -> list:
         try:
