@@ -2,7 +2,7 @@ import sqlite3
 from backend.Database.dbFunc import obtenir_connection
 
 # Connection a la base de données
-conn = obtenir_connection("backend/Database/munchyroll.db")
+conn = obtenir_connection()
 
 # region Création des tables principales dans la bd
 cursor = conn.cursor()

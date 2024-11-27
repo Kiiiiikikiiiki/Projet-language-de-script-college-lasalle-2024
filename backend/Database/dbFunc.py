@@ -13,6 +13,8 @@ def obtenir_connection() -> sqlite3.Connection:
     """
     try:
         conn = sqlite3.connect("backend/Database/munchyroll.db", detect_types=sqlite3.PARSE_DECLTYPES | sqlite3.PARSE_COLNAMES)
+        cursor = conn.cursor()
+        cursor.execute("PRAGMA foreign_keys = ON")
         return conn
     except sqlite3.Error as e:
         print(e)

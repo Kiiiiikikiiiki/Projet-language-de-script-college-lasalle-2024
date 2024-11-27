@@ -27,8 +27,6 @@ class AnimeDAO:
             cursor.execute("INSERT INTO anime (anime_name, desc, rating, picture_url, release_date) VALUES" +
                         "(?, ?, ?, ?, ?)", (anime_name, desc, rating, picture_url ,release_date))
             
-            anime_name = cursor.lastrowid
-            
             for type in types:
                 cursor.execute("INSERT INTO animeType (anime_name, type) VALUES (?, ?)",
                             (anime_name, type))
