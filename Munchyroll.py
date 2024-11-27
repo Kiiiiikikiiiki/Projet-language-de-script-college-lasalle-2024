@@ -27,6 +27,7 @@ def login():
         elif MemberDAO.verifyMember(conn, name, password):
             logIn_member = MemberDAO.get_member_by_username(conn, name)
             fermer_connection(conn)
+            print("Login member id : ", logIn_member.getMember_id())
             return render_template('index.html', logIn_member=logIn_member)
         else:
             return render_template('login.html', error='Invalid username or password')
@@ -37,13 +38,11 @@ def dashboard(member_id):
     conn = obtenir_connection()
     animeList = AnimeDAO.getAll_anime(conn)
     fermer_connection(conn)
-    for anime in animeList:
-        print(anime.anime_name)
     return render_template('Dashboard.html', member_id=member_id, animeList=animeList)
 
-@app.route('/favAnimes')
-def favAnimes():
-    return render_template('Animes.html')
+# @app.route('/favAnimes')
+# def favAnimes():
+#     return render_template('Animes.html')
 
 @app.route('/aboutUs')
 def aboutUs():
@@ -128,17 +127,40 @@ def add_season(anime_name):
 @app.route('/addEpisode/<anime_name>', methods=['POST', 'GET'])
 def add_episode( anime_name):
     if request.method == 'POST':
+        conn = obtenir_connection()
         episode_name = request.form['episode_name']
         episode_reiting = 0.0
         episode_like = 0
         episode_dislike = 0
         episode_image = request.form['episode_image']
-        episode_season_id = 1
+        episode_season_name = request.form['episode_season_name']
+        episode_season_id = SeasonDAO.get_season_id_by_season_name_and_anime_name(conn, episode_season_name, anime_name)
         episode_release_date = request.form['episode_release_date']
-        conn = obtenir_connection()
         EpisodeDAO.add_episode(conn, episode_name, episode_reiting, episode_like, episode_dislike, episode_image, episode_season_id, episode_release_date)
         fermer_connection(conn)
         return redirect(url_for('animePage', anime_name=anime_name))
+    
+@app.route('/deleteSeason/<anime_name>', methods=['POST'])
+def delete_season(anime_name):
+    if request.method == 'POST':
+        conn = obtenir_connection()
+        season_name = request.form['season_name']
+        season_id = SeasonDAO.get_season_id_by_season_name_and_anime_name(conn, season_name, anime_name)
+        SeasonDAO.delete_season(conn, season_id)
+        fermer_connection(conn)
+    return redirect(url_for('animePage', anime_name=anime_name))
+
+@app.route('/deleteEpisode/<anime_name>', methods=['POST'])
+def delete_episode(anime_name):
+    if request.method == 'POST':
+        conn = obtenir_connection()
+        episode_name = request.form['episode_name']
+        episode_season_name = request.form['episode_season_name']
+        episode_season_id = SeasonDAO.get_season_id_by_season_name_and_anime_name(conn, episode_season_name, anime_name)
+        episode_id = EpisodeDAO.get_episode_id_by_episode_name_and_season_id(conn, episode_name, episode_season_id)
+        EpisodeDAO.delete_episode(conn, episode_id)
+        fermer_connection(conn)
+    return redirect(url_for('animePage', anime_name=anime_name))
         
 
 @app.route('/animePageMember/<anime_name>/<member_id>')
@@ -199,6 +221,24 @@ def register():
         else:
             return render_template('Register.html', error = 'Passwords do not match')
     return render_template('Register.html')  
+
+@app.route('/favAnimes/<member_id>')
+def favAnimes(member_id):
+    print("Member_id de fav anime : ",member_id)
+    conn = obtenir_connection()
+    favAnimeName = MemberDAO.get_anime_list(conn, member_id)
+    favAnime = []
+    for name in favAnimeName:
+        favAnime.append(AnimeDAO.get_anime(conn, name))
+    fermer_connection(conn)
+    return render_template('Animes.html', favAnime=favAnime, member_id=member_id)
+
+@app.route('/deleteFavAnime/<member_id>/<anime_name>', methods=['POST'])
+def deleteFavAnime(member_id, anime_name):
+    conn = obtenir_connection()
+    MemberDAO.delete_anime_to_member(conn, member_id, anime_name)
+    fermer_connection(conn)
+    return redirect(url_for('favAnimes', member_id=member_id))
     
 
 

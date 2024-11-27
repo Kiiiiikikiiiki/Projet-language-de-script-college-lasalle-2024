@@ -124,3 +124,34 @@ class EpisodeDAO:
         except sqlite3.Error as e:
             print(e)
             return []
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
+        
+    def get_episode_id_by_episode_name_and_season_id(conn: sqlite3.Connection, episode_name: str, season_id: int) -> int:
+        try:
+            cursor = conn.cursor()
+            cursor.execute("SELECT episode_id FROM episode WHERE episode_name = ? AND season_id = ?", (episode_name, season_id))
+            row = cursor.fetchone()
+            return row[0]
+        except sqlite3.Error as e:
+            print(e)
+            return None

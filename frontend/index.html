@@ -16,15 +16,15 @@
                 <img src="frontend/Image/LogoApp.webp" alt="logo" width="100px" height="100px">
             </li>
             <li><a href="/dashboard/{{ logIn_member.getMember_id() }}" target="contentFrame">Home</a></li>
-            <li><a href="/favAnimes" target="contentFrame">Favorite Animes</a></li>
+            <li><a href="/favAnimes/{{ logIn_member.getMember_id() }}" target="contentFrame">Favorite Animes</a></li>
             <li><a href="/aboutUs" target="contentFrame">About Us</a></li>
             <li>
-                <div class="search-container">
+                <!-- <div class="search-container">
                     <form action="#" method="get" class="serach-anime">
                         <input type="text" placeholder="Search Anime..." name="search-anime" id="search-anime">
                         <button type="submit" class="search-btn"><img src="frontend/Image/Icons/search.png" alt="search icon"></button>
                     </form>
-                </div>
+                </div> -->
                 <div class="logout-section">
                     <button type="button" onclick="window.location.href = '/login';"><img src="frontend/Image/Icons/logout.png" alt=""></button>
                 </div>

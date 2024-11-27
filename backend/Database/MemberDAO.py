@@ -165,6 +165,16 @@ class MemberDAO:
             print(e)
             return False
         
+    def delete_anime_to_member(conn: sqlite3.Connection, member_id: int, anime_name: str) -> bool:
+        try:
+            cursor = conn.cursor()
+            cursor. execute("DELETE FROM memberAnime WHERE member_id = ? AND anime_name = ?", (member_id, anime_name))
+            conn.commit()
+            return True
+        except sqlite3.Error as e:
+            print(e)
+            return False
+        
     def verifyMember(conn: sqlite3.Connection, username: str, password: str) -> bool:
         try:
             cursor = conn.cursor()

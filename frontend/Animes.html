@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="frontend/CSS/styleAnimes.css">
+    <link rel="stylesheet" href="/frontend/CSS/styleAnimes.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -22,51 +22,17 @@
                 <button class="prev-animes" onclick="scrollCarouselAnimes(-300)">◀</button>
                 <div class="carouselA">
                     <ul>
+                        {% for anime in favAnime %}
                         <li>
                             <div class="image-container">
-                                <a href="/animePage" target="contentFrame"><img src="frontend/Image/Animes/anime1/anime1.png" alt="anime1"></a>
-                                <button type="button" class="btn btn-primary delete-anime" data-toggle="modal" data-target="#delete-anime-modal">
-                                    <img src="frontend/Image/Icons/delete.png" alt="delete icon">
+                                <a href="/animePageMember/{{ anime.anime_name }}/{{ member_id }}" target="contentFrame"><img src="/frontend{{ anime.picture_url[1:] }}" alt="{{ anime.anime_name }}"></a>
+                                <button type="button" class="btn btn-primary delete-anime" data-toggle="modal" data-target="#delete-anime-modal" data-anime-name="{{ anime.anime_name }}" data-member-id="{{ member_id }}">
+                                    <img src="/frontend/Image/Icons/delete.png" alt="delete icon">
                                 </button>
                             </div>
-                            <h3>Demon Slayer: Kimetsu no Yaiba</h3>
+                            <h3>{{ anime.anime_name }}</h3>
                         </li>
-                        <li>
-                            <div class="image-container">
-                                <a href="./AnimePage.html" target="contentFrame"><img src="frontend/Image/Animes/anime2/anime2.png" alt="anime2"></a>
-                                <button type="button" class="btn btn-primary delete-anime" data-toggle="modal" data-target="#delete-anime-modal">
-                                    <img src="frontend/Image/Icons/delete.png" alt="delete icon">
-                                </button>
-                            </div>
-                            <h3>Attack On Titan</h3>
-                        </li>
-                        <li>
-                            <div class="image-container">
-                                <a href="./AnimePage.html" target="contentFrame"><img src="frontend/Image/Animes/anime3/anime3.png" alt="anime3"></a>
-                                <button type="button" class="btn btn-primary delete-anime" data-toggle="modal" data-target="#delete-anime-modal">
-                                    <img src="frontend/Image/Icons/delete.png" alt="delete icon">
-                                </button>
-                            </div>
-                            <h3>Dragon Ball Super</h3>
-                        </li>
-                        <li>
-                            <div class="image-container">
-                                <a href="./AnimePage.html" target="contentFrame"><img src="frontend/Image/Animes/anime4/anime4.png" alt="anime4"></a>
-                                <button type="button" class="btn btn-primary delete-anime" data-toggle="modal" data-target="#delete-anime-modal">
-                                    <img src="frontend/Image/Icons/delete.png" alt="delete icon">
-                                </button>
-                            </div>
-                            <h3>One Piece</h3>
-                        </li>
-                        <li>
-                            <div class="image-container">
-                                <a href="./AnimePage.html" target="contentFrame"><img src="frontend/Image/Animes/anime5/anime5.png" alt="anime5"></a>
-                                <button type="button" class="btn btn-primary delete-anime" data-toggle="modal" data-target="#delete-anime-modal">
-                                    <img src="frontend/Image/Icons/delete.png" alt="delete icon">
-                                </button>
-                            </div>
-                            <h3>Dandadan</h3>
-                        </li>
+                        {% endfor %}
                     </ul>
                 </div>
                 <button class="next-animes" onclick="scrollCarouselAnimes(300)">▶</button>
@@ -77,7 +43,7 @@
     <div id="delete-anime-modal" class="modal fade" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <form>
+                <form id="delete-anime-form" method="POST" action="{{url_for('deleteFavAnime', member_id='', anime_name='')}}">
                     <div class="modal-header">
                         <h3 class="modal-title">Delete Anime</h3>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -100,6 +66,14 @@
             const carousel = document.querySelector(".carouselA");
             carousel.scrollBy({ left: offset, behavior: "smooth" });
         }
+
+        $(document).on('click', '[data-target="#delete-anime-modal"]', function () {
+            var animeName = $(this).data('anime-name');
+            var member_id = $(this).data('member-id');
+            console.log("member_id : ",member_id);
+            var formAction = "/deleteFavAnime/" + member_id + "/" + animeName; 
+            $('#delete-anime-form').attr('action', formAction); 
+        });
   
     </script>
 </body>

@@ -29,9 +29,9 @@
                 <h1>{{ anime.anime_name }}</h1>
                 <p>{{ anime.desc }}</p>
                 <button id="add-season" type="button" class="btn btn-primary" data-toggle="modal" data-target="#add-season-modal" data-anime-name="{{ anime.anime_name }}"><img src="/frontend/Image/Icons/add.png"><span>Add New Season</span></button>
-                <button id="add-episode" type="button" class="btn btn-primary" data-toggle="modal" data-target="#add-episode-modal" data-anime-name="{{ anime.anime_name }}" data-saison-id="{{ season.season_id }}"><img src="/frontend/Image/Icons/add.png"><span>Add New Episode</span></button>
+                <button id="add-episode" type="button" class="btn btn-primary" data-toggle="modal" data-target="#add-episode-modal" data-anime-name="{{ anime.anime_name }}"><img src="/frontend/Image/Icons/add.png"><span>Add New Episode</span></button>
                 <button id="add-season" type="button" class="btn btn-primary" data-toggle="modal" data-target="#delete-season-modal" data-anime-name="{{ anime.anime_name }}"><img src="/frontend/Image/Icons/delete.png"><span>Delete Season</span></button>
-                <button id="add-episode" type="button" class="btn btn-primary" data-toggle="modal" data-target="#delete-episode-modal" data-anime-name="{{ anime.anime_name }}" data-saison-name="{{ season.season_name }}"><img src="/frontend/Image/Icons/delete.png"><span>Delete Episode</span></button>
+                <button id="add-episode" type="button" class="btn btn-primary" data-toggle="modal" data-target="#delete-episode-modal" data-anime-name="{{ anime.anime_name }}"><img src="/frontend/Image/Icons/delete.png"><span>Delete Episode</span></button>
             </div>
         </div>        
         <div class="episodes-anime">
@@ -127,7 +127,7 @@
                         </div>
                         <div class="form-group">
                             <label>Season Name:</label>
-                            <input type="text" class="form-control" placeholder="Enter Season Name">
+                            <input type="text" name="episode_season_name" class="form-control" placeholder="Enter Season Name">
                         </div>
                         <div class="form-group">
                             <label>Release Date</label>
@@ -146,7 +146,7 @@
     <div id="delete-season-modal" class="modal fade" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <form>
+                <form id="delete-season-form" method="post" action="{{url_for('delete_season', anime_name='')}}">
                     <div class="modal-header">
                         <h3 class="modal-title">Delete Season</h3>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -156,32 +156,7 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <label>Season Name</label>
-                            <input type="text" class="form-control" placeholder="Enter Season Name">
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-primary">Delete Season</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-    <!-- Delete Season Modal -->
-    <div id="delete-season-modal" class="modal fade" role="dialog">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <form>
-                    <div class="modal-header">
-                        <h3 class="modal-title">Delete Season</h3>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <label>Season Name</label>
-                            <input type="text" class="form-control" placeholder="Enter Season Name">
+                            <input type="text" name="season_name" class="form-control" placeholder="Enter Season Name">
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -196,7 +171,7 @@
     <div id="delete-episode-modal" class="modal fade" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <form>
+                <form id="delete-episode-form" method="post" action="{{url_for('delete_episode', anime_name='')}}">
                     <div class="modal-header">
                         <h3 class="modal-title">Delete Episode</h3>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -206,11 +181,11 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <label>Episode Name</label>
-                            <input type="text" class="form-control" placeholder="Enter Episode Name">
+                            <input type="text" name="episode_name" class="form-control" placeholder="Enter Episode Name">
                         </div>
                         <div class="form-group">
                             <label>Season Name</label>
-                            <input type="text" class="form-control" placeholder="Enter Season Name">
+                            <input type="text" name="episode_season_name" class="form-control" placeholder="Enter Season Name">
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -227,6 +202,24 @@
         var animeName = $(this).data('anime-name');
         var formAction = "/addSeason/" + animeName; 
         $('#add-season-form').attr('action', formAction); 
+    });
+
+    $(document).on('click', '[data-target="#add-episode-modal"]', function () {
+        var animeName = $(this).data('anime-name');
+        var formAction = "/addEpisode/" + animeName; 
+        $('#add-episode-form').attr('action', formAction); 
+    });
+
+    $(document).on('click', '[data-target="#delete-season-modal"]', function () {
+        var animeName = $(this).data('anime-name');
+        var formAction = "/deleteSeason/" + animeName; 
+        $('#delete-season-form').attr('action', formAction); 
+    });
+
+    $(document).on('click', '[data-target="#delete-episode-modal"]', function () {
+        var animeName = $(this).data('anime-name');
+        var formAction = "/deleteEpisode/" + animeName; 
+        $('#delete-episode-form').attr('action', formAction); 
     });
 </script>
 </html>
