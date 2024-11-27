@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for
 from backend.Database.dbFunc import obtenir_connection, fermer_connection
 from backend.Database.AdminDAO import AdminDAO
 from backend.Database.MemberDAO import MemberDAO
+from backend.Database.AnimeDAO import AnimeDAO
 from backend.Class_Domain.User import User
 
 app = Flask(__name__, template_folder='frontend', static_folder='frontend')
@@ -29,7 +30,12 @@ def login():
 
 @app.route('/dashboard/<member_id>', methods=['GET', 'POST'])
 def dashboard(member_id):
-    return render_template('Dashboard.html', member_id=member_id)
+    conn = obtenir_connection()
+    animeList = AnimeDAO.getAll_anime(conn)
+    fermer_connection(conn)
+    for anime in animeList:
+        print(anime.anime_name)
+    return render_template('Dashboard.html', member_id=member_id, animeList=animeList)
 
 @app.route('/favAnimes')
 def favAnimes():
@@ -65,9 +71,12 @@ def search_user():
     fermer_connection(conn)
     return render_template('Users.html', users=users)
 
-@app.route('/animePage')
-def animePage():
-    return render_template('AnimePage.html')
+@app.route('/animePage/<anime_name>')
+def animePage(anime_name):
+    conn = obtenir_connection()
+    anime = AnimeDAO.get_anime(conn, anime_name)
+    fermer_connection(conn)
+    return render_template('AnimePage.html', anime=anime)
 
 @app.route('/episodePage')
 def episodePage():

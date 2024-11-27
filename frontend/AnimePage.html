@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="frontend/CSS/styleAnimepage.css">
+    <link rel="stylesheet" href="/frontend/CSS/styleAnimepage.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -18,111 +18,38 @@
     <div class="my-container">
         <div class="info-anime">
             <div class="image-anime">
-                <img src="frontend/Image/Animes/anime4/anime4.png">
+                <img src="/frontend/{{ anime.picture_url[1:] }}">
                 <button type="button" class="btn btn-primary add-anime" data-toggle="modal" data-target="#add-anime-modal">
-                    <img src="frontend/Image/Icons/add.png" alt="add icon">
+                    <img src="/frontend/Image/Icons/add.png" alt="add icon">
                 </button>
-                <button class="like">👍<span id="nb-likes">20.000</span></button>
-                <button class="dislike">👎<span id="nb-dislikes">1.000</span></button id="nb-dislikes">
-                <h4>Release date: 01/01/2023</h4>
+                <button class="like">⭐<span id="nb-likes">{{ anime.rating }}</span></button>
+                <h4>Release date: {{ anime.release_date.strftime('%m/%d/%Y') }}</h4>
             </div>
             <div class="description-anime">
-                <h1>One Piece</h1>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam vitae dolor vitae
-                    magna feugiat venenatis at a urna. Duis a luctus dolor. Aenean ultrices dui ut
-                    commodo luctus. In mauris quam, vulputate nec accumsan non, congue ut nibh. Cras
-                    eleifend tincidunt euismod. Nunc eleifend, diam tristique maximus eleifend, metus
-                    turpis euismod felis, ac tempus mi metus nec ipsum. Nunc tristique lorem in sem
-                    faucibus, vitae convallis augue porta. Vivamus viverra id nunc eu tristique.
-                    Maecenas convallis massa eget ligula varius, ut posuere justo convallis.
-                    Pellentesque non diam hendrerit, commodo massa eu, aliquet eros.
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam vitae dolor vitae
-                    magna feugiat venenatis at a urna. Duis a luctus dolor. Aenean ultrices dui ut
-                    commodo luctus. In mauris quam, vulputate nec accumsan non, congue ut nibh. Cras
-                    eleifend tincidunt euismod. Nunc eleifend, diam tristique maximus eleifend, metus
-                    turpis euismod felis, ac tempus mi metus nec ipsum. Nunc tristique lorem in sem
-                    faucibus, vitae convallis augue porta. Vivamus viverra id nunc eu tristique.
-                    Maecenas convallis massa eget ligula varius, ut posuere justo convallis.
-                    Pellentesque non diam hendrerit, commodo massa eu, aliquet eros.
-                </p>
-                <button id="add-season" type="button" class="btn btn-primary" data-toggle="modal" data-target="#add-season-modal"><img src="frontend/Image/Icons/add.png"><span>Add New Season</span></button>
-                <button id="add-episode" type="button" class="btn btn-primary" data-toggle="modal" data-target="#add-episode-modal"><img src="frontend/Image/Icons/add.png"><span>Add New Episode</span></button>
-                <button id="add-season" type="button" class="btn btn-primary" data-toggle="modal" data-target="#delete-season-modal"><img src="frontend/Image/Icons/delete.png"><span>Delete Season</span></button>
-                <button id="add-episode" type="button" class="btn btn-primary" data-toggle="modal" data-target="#delete-episode-modal"><img src="frontend/Image/Icons/delete.png"><span>Delete Episode</span></button>
+                <h1>{{ anime.anime_name }}</h1>
+                <p>{{ anime.desc }}</p>
+                <button id="add-season" type="button" class="btn btn-primary" data-toggle="modal" data-target="#add-season-modal"><img src="/frontend/Image/Icons/add.png"><span>Add New Season</span></button>
+                <button id="add-episode" type="button" class="btn btn-primary" data-toggle="modal" data-target="#add-episode-modal"><img src="/frontend/Image/Icons/add.png"><span>Add New Episode</span></button>
+                <button id="add-season" type="button" class="btn btn-primary" data-toggle="modal" data-target="#delete-season-modal"><img src="/frontend/Image/Icons/delete.png"><span>Delete Season</span></button>
+                <button id="add-episode" type="button" class="btn btn-primary" data-toggle="modal" data-target="#delete-episode-modal"><img src="/frontend/Image/Icons/delete.png"><span>Delete Episode</span></button>
             </div>
         </div>        
         <div class="episodes-anime">
             <table class="episodes-table">
                 <tbody>
-                    <!-- Saison 1 -->
-                    <tr>
-                        <td colspan="4"><h3>Saison 1</h3></td>
-                    </tr>
-                    <tr>
-                        <td><a href="/episodePage" target="contentFrame">Episode 1</a></td>
-                        <td>Release date: 01/01/2023</td>
-                        <td>👍<span id="nb-likes">20.000</span></td>
-                        <td>👎<span id="nb-dislikes">1.000</span></td>
-                    </tr>
-                    <tr>
-                        <td><a href="./Episodes.html" target="contentFrame">Episode 2</a></td>
-                        <td>Release date: 01/01/2023</td>
-                        <td>👍<span id="nb-likes">20.000</span></td>
-                        <td>👎<span id="nb-dislikes">1.000</span></td>
-                    </tr>
-                    <tr>
-                        <td><a href="./Episodes.html" target="contentFrame">Episode 3</a></td>
-                        <td>Release date: 01/01/2023</td>
-                        <td>👍<span id="nb-likes">20.000</span></td>
-                        <td>👎<span id="nb-dislikes">1.000</span></td>
-                    </tr>
-            
-                    <!-- Saison 2 -->
-                    <tr>
-                        <td colspan="4"><h3>Saison 2</h3></td>
-                    </tr>
-                    <tr>
-                        <td><a href="./Episodes.html" target="contentFrame">Episode 1</a></td>
-                        <td>Release date: 01/01/2023</td>
-                        <td>👍<span id="nb-likes">20.000</span></td>
-                        <td>👎<span id="nb-dislikes">1.000</span></td>
-                    </tr>
-                    <tr>
-                        <td><a href="./Episodes.html" target="contentFrame">Episode 2</a></td>
-                        <td>Release date: 01/01/2023</td>
-                        <td>👍<span id="nb-likes">20.000</span></td>
-                        <td>👎<span id="nb-dislikes">1.000</span></td>
-                    </tr>
-                    <tr>
-                        <td><a href="./Episodes.html" target="contentFrame">Episode 3</a></td>
-                        <td>Release date: 01/01/2023</td>
-                        <td>👍<span id="nb-likes">20.000</span></td>
-                        <td>👎<span id="nb-dislikes">1.000</span></td>
-                    </tr>
-
-                    <!-- Saison 3 -->
-                    <tr>
-                        <td colspan="4"><h3>Saison 3</h3></td>
-                    </tr>
-                    <tr>
-                        <td><a href="./Episodes.html" target="contentFrame">Episode 1</a></td>
-                        <td>Release date: 01/01/2023</td>
-                        <td>👍<span id="nb-likes">20.000</span></td>
-                        <td>👎<span id="nb-dislikes">1.000</span></td>
-                    </tr>
-                    <tr>
-                        <td><a href="./Episodes.html" target="contentFrame">Episode 2</a></td>
-                        <td>Release date: 01/01/2023</td>
-                        <td>👍<span id="nb-likes">20.000</span></td>
-                        <td>👎<span id="nb-dislikes">1.000</span></td>
-                    </tr>
-                    <tr>
-                        <td><a href="./Episodes.html" target="contentFrame">Episode 3</a></td>
-                        <td>Release date: 01/01/2023</td>
-                        <td>👍<span id="nb-likes">20.000</span></td>
-                        <td>👎<span id="nb-dislikes">1.000</span></td>
-                    </tr>
+                    {% for season in anime.seasons %}
+                        <tr>
+                            <td colspan="4"><h3>{{ season.season_name }}</h3></td>
+                        </tr>
+                        {% for episode in season.episodes %}
+                            <tr>
+                                <td><a href="/episodePage" target="contentFrame">{{ episode.episode_name }}</a></td>
+                                <td>Release date: {{ episode.release_date.strftime('%m/%d/%Y') }}</td>
+                                <td>👍<span id="nb-likes">{{ episode.nb_like }}</span></td>
+                                <td>👎<span id="nb-dislikes">{{  episode.nb_dislike }}</span></td>
+                            </tr>
+                        {% endfor %}
+                    {% endfor %}
                 </tbody>
             </table>
         </div>

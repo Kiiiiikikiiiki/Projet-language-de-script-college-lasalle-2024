@@ -22,56 +22,18 @@
                 <button class="prev-animes" onclick="scrollCarouselAnimes(-300)">◀</button>
                 <div class="carouselA">
                     <ul>
+                        {% for anime in animeList %}
                         <li>
                             <div class="image-container">
-                                <a href="/animePage" target="contentFrame"><img src="/frontend/Image/Animes/anime1/anime1.png" alt="anime1"></a>
+                                <a href="/animePage/{{ anime.anime_name }}" target="contentFrame"><img src="/frontend{{ anime.picture_url[1:] }}" alt="{{ anime.anime_name }}"></a>
                                 <button type="button" class="btn btn-primary add-anime" data-toggle="modal"
                                     data-target="#add-anime-modal">
                                     <img src="/frontend/Image/Icons/add.png" alt="add icon">
                                 </button>
                             </div>
-                            <h3>Demon Slayer: Kimetsu no Yaiba</h3>
+                            <h3>{{ anime.anime_name }}</h3>
                         </li>
-                        <li>
-                            <div class="image-container">
-                                <a href="./AnimePage.html" target="contentFrame"><img src="/frontend/Image/Animes/anime2/anime2.png" alt="anime2"></a>
-                                <button type="button" class="btn btn-primary add-anime" data-toggle="modal"
-                                    data-target="#add-anime-modal">
-                                    <img src="/frontend/Image/Icons/add.png" alt="add icon">
-                                </button>
-                            </div>
-                            <h3>Attack On Titan</h3>
-                        </li>
-                        <li>
-                            <div class="image-container">
-                                <a href="./AnimePage.html" target="contentFrame"><img src="/frontend/Image/Animes/anime3/anime3.png" alt="anime3"></a>
-                                <button type="button" class="btn btn-primary add-anime" data-toggle="modal"
-                                    data-target="#add-anime-modal">
-                                    <img src="/frontend/Image/Icons/add.png" alt="add icon">
-                                </button>
-                            </div>
-                            <h3>Dragon Ball Super</h3>
-                        </li>
-                        <li>
-                            <div class="image-container">
-                                <a href="./AnimePage.html" target="contentFrame"><img src="/frontend/Image/Animes/anime4/anime4.png" alt="anime4"></a>
-                                <button type="button" class="btn btn-primary add-anime" data-toggle="modal"
-                                    data-target="#add-anime-modal">
-                                    <img src="/frontend/Image/Icons/add.png" alt="add icon">
-                                </button>
-                            </div>
-                            <h3>One Piece</h3>
-                        </li>
-                        <li>
-                            <div class="image-container">
-                                <a href="./AnimePage.html" target="contentFrame"><img src="/frontend/Image/Animes/anime5/anime5.png" alt="anime5"></a>
-                                <button type="button" class="btn btn-primary add-anime" data-toggle="modal"
-                                    data-target="#add-anime-modal">
-                                    <img src="/frontend/Image/Icons/add.png" alt="add icon">
-                                </button>
-                            </div>
-                            <h3>Dandadan</h3>
-                        </li>
+                        {% endfor %}
                     </ul>
                 </div>
                 <button class="next-animes" onclick="scrollCarouselAnimes(300)">▶</button>
