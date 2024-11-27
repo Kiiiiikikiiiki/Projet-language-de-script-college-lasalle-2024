@@ -1,5 +1,6 @@
 import sqlite3
 from backend.Class_Domain.Admin import Admin
+from backend.Class_Domain.User import User
 
 class AdminDAO:
     def add_admin(conn: sqlite3.Connection, username: str, password_hash: str) -> bool:
@@ -56,6 +57,21 @@ class AdminDAO:
             cursor.execute("DELETE FROM admin WHERE admin_id = ?", (admin_id,))
             conn.commit()
             return True
+        except sqlite3.Error as e:
+            print(e)
+            return False
+        
+    def verifyAdmin(conn: sqlite3.Connection, username: str, password: str) -> bool:
+        try:
+            print("i went into veryAdmin")
+            cursor = conn.cursor()
+            cursor.execute("SELECT * FROM admin WHERE username = ? AND password_hash = ?", 
+                           (username, User.get_hash_password(password)))
+            row = cursor.fetchone()
+            print("Row:", row)
+            print("hashed password:", User.get_hash_password(password))
+
+            return row is not None
         except sqlite3.Error as e:
             print(e)
             return False

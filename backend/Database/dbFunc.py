@@ -1,7 +1,7 @@
 import sqlite3
 import datetime
 
-def obtenir_connection(db_name: str) -> sqlite3.Connection:
+def obtenir_connection() -> sqlite3.Connection:
     """
     Attempts to open a connection to a sqlite database
     and returns it if successful.
@@ -12,7 +12,7 @@ def obtenir_connection(db_name: str) -> sqlite3.Connection:
         sqlite3.Connection: The connection to the database, or None if an error occurs
     """
     try:
-        conn = sqlite3.connect(db_name, detect_types=sqlite3.PARSE_DECLTYPES | sqlite3.PARSE_COLNAMES)
+        conn = sqlite3.connect("backend/Database/munchyroll.db", detect_types=sqlite3.PARSE_DECLTYPES | sqlite3.PARSE_COLNAMES)
         return conn
     except sqlite3.Error as e:
         print(e)

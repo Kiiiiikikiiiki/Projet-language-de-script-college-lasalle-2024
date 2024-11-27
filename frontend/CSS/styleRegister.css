@@ -9,7 +9,7 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 400px;
+    width: 600px;
     padding: 40px;
     transform: translate(-50%, -50%);
     background: rgba(52, 201, 172, .4);
@@ -53,6 +53,6 @@
     z-index: -1;
 }
 
-#error-login{
+#error-register{
     color: red;
 }

@@ -1,6 +1,7 @@
 import sqlite3
 from backend.Class_Domain.Member import Member
 from backend.Database.CommentDAO import CommentDAO
+from backend.Class_Domain.User import User
 
 class MemberDAO:
     
@@ -137,6 +138,17 @@ class MemberDAO:
             cursor.execute("INSERT INTO memberAnime (member_id, anime_name) VALUES (?, ?)", (member_id, anime_name))
             conn.commit()
             return True
+        except sqlite3.Error as e:
+            print(e)
+            return False
+        
+    def verifyMember(conn: sqlite3.Connection, username: str, password: str) -> bool:
+        try:
+            cursor = conn.cursor()
+            cursor.execute("SELECT * FROM member WHERE username = ? AND password_hash = ?", 
+                           (username, User.get_hash_password(password)))
+            row = cursor.fetchone()
+            return row is not None
         except sqlite3.Error as e:
             print(e)
             return False

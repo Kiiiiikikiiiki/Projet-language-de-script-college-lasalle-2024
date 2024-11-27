@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./CSS/styleIndex.css">
+    <link rel="stylesheet" href="frontend/CSS/styleIndex.css">
     <title>Index Page: Munchyroll</title>
 </head>
 
@@ -13,26 +13,26 @@
     <div class="navbar-horizontal">
         <ul>
             <li>
-                <img src="./Image/LogoApp.webp" alt="logo" width="100px" height="100px">
+                <img src="frontend/Image/LogoApp.webp" alt="logo" width="100px" height="100px">
             </li>
-            <li><a href="./Dashboard.html" target="contentFrame">Home</a></li>
-            <li><a href="./Animes.html" target="contentFrame">Favorite Animes</a></li>
-            <li><a href="./AboutUs.html" target="contentFrame">About Us</a></li>
+            <li><a href="/dashboard" target="contentFrame">Home</a></li>
+            <li><a href="/favAnimes" target="contentFrame">Favorite Animes</a></li>
+            <li><a href="/aboutUs" target="contentFrame">About Us</a></li>
             <li>
                 <div class="search-container">
                     <form action="#" method="get" class="serach-anime">
                         <input type="text" placeholder="Search Anime..." name="search-anime" id="search-anime">
-                        <button type="submit" class="search-btn"><img src="./Image/Icons/search.png" alt="search icon"></button>
+                        <button type="submit" class="search-btn"><img src="frontend/Image/Icons/search.png" alt="search icon"></button>
                     </form>
                 </div>
                 <div class="logout-section">
-                    <button type="button"><img src="./Image/Icons/logout.png" alt=""></button>
+                    <button type="button" onclick="window.location.href = '/login';"><img src="frontend/Image/Icons/logout.png" alt=""></button>
                 </div>
             </li>
         </ul>
     </div>
     <div class="container">
-        <iframe src="./Dashboard.html" name="contentFrame" id="contentFrame"></iframe>
+        <iframe src="/dashboard" name="contentFrame" id="contentFrame"></iframe>
     </div>
 </body>
 
