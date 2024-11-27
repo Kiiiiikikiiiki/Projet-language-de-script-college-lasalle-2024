@@ -17,17 +17,17 @@
     </div>
     <div class="my-container">
         <div class="image-episode">
-            <a><img src="/frontend/Image/Animes/anime4/s1/ep1.png"></a>
+            <a><img src="/frontend{{ episode.picture_url[1:] }}"></a>
         </div>
         <div class="comments">
             <a href="./AnimePage.html" target="contentFrame" id="title">
-                <h1>One Piece - <span style="font-size: 32px;">Saison 3</span></h1>
+                <h1>{{ anime_name }} - <span style="font-size: 32px;">{{ season_name }}</span></h1>
             </a>
             <div class="episode-title">
-                <h2>E-FMI3 - Revelación impactante. Un gran benefactor: Kuma</h2>
-                <button class="like">👍<span id="nb-likes">20.000</span></button>
-                <button class="dislike">👎<span id="nb-dislikes">1.000</span></button id="nb-dislikes">
-                <p>Release date: 01/01/2023</p>
+                <h2>{{ episode.episode_name }}</h2>
+                <button class="like">👍<span id="nb-likes">{{ episode.nb_like }}</span></button>
+                <button class="dislike">👎<span id="nb-dislikes">{{ episode.nb_dislike }}</span></button id="nb-dislikes">
+                <p>Release date: {{ episode.release_date.strftime('%m/%d/%Y') }}</p>
             </div>
             <div class="comments-section">
                 <div class="writing-field">
