@@ -5,6 +5,7 @@ from backend.Database.MemberDAO import MemberDAO
 from backend.Database.AnimeDAO import AnimeDAO
 from backend.Class_Domain.User import User
 from backend.Database.AnimeDAO import AnimeDAO
+from backend.Database.EpisodeDAO import EpisodeDAO
 
 app = Flask(__name__, template_folder='frontend', static_folder='frontend')
 
@@ -96,16 +97,19 @@ def search_user():
     fermer_connection(conn)
     return render_template('Users.html', users=users)
 
-@app.route('/animePage/<anime_name>')
-def animePage(anime_name):
+@app.route('/animePage/<anime_name>/<member_id>')
+def animePage(anime_name, member_id):
     conn = obtenir_connection()
     anime = AnimeDAO.get_anime(conn, anime_name)
     fermer_connection(conn)
-    return render_template('AnimePage.html', anime=anime)
+    return render_template('AnimePage.html', anime=anime, member_id=member_id)
 
-@app.route('/episodePage')
-def episodePage():
-    return render_template('Episodes.html')
+@app.route('/episodePage/<episode_id>/<member_id>')
+def episodePage(episode_id, member_id):
+    conn = obtenir_connection()
+    episode = EpisodeDAO.get_episode(conn, episode_id)
+    fermer_connection(conn)
+    return render_template('Episodes.html', episode=episode, member_id=member_id)
 
 @app.route('/register', methods=['POST', 'GET'])
 def register():

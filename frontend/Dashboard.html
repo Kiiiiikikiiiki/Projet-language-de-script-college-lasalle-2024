@@ -25,7 +25,7 @@
                         {% for anime in animeList %}
                         <li>
                             <div class="image-container">
-                                <a href="/animePage/{{ anime.anime_name }}" target="contentFrame"><img src="/frontend{{ anime.picture_url[1:] }}" alt="{{ anime.anime_name }}"></a>
+                                <a href="/animePage/{{ anime.anime_name }}/{{ member_id }}" target="contentFrame"><img src="/frontend{{ anime.picture_url[1:] }}" alt="{{ anime.anime_name }}"></a>
                                 <button type="button" class="btn btn-primary add-anime" data-toggle="modal"
                                     data-target="#add-anime-modal">
                                     <img src="/frontend/Image/Icons/add.png" alt="add icon">

@@ -48,6 +48,7 @@ cursor.execute('''
         modification_date DATE,
         
         FOREIGN KEY (anime_name) REFERENCES anime(anime_name)
+        ON DELETE CASCADE
     )
 ''')
 
@@ -65,6 +66,7 @@ cursor.execute('''
         modification_date DATE,
         
         FOREIGN KEY (season_id) REFERENCES season(season_id)
+        ON DELETE CASCADE
     )
 ''')
 
@@ -79,8 +81,8 @@ cursor.execute('''
         nb_dislike INTEGER NOT NULL,
         creation_date DATE NOT NULL,
         
-        FOREIGN KEY (member_id) REFERENCES member(member_id),
-        FOREIGN KEY (episode_id) REFERENCES episode(episode_id)
+        FOREIGN KEY (member_id) REFERENCES member(member_id) ON DELETE CASCADE,
+        FOREIGN KEY (episode_id) REFERENCES episode(episode_id) ON DELETE CASCADE
     )
 ''')
 # endregion
@@ -94,8 +96,8 @@ cursor.execute('''
         anime_name TEXT NOT NULL,
         
         PRIMARY KEY (member_id, anime_name),
-        FOREIGN KEY (member_id) REFERENCES member(member_id),
-        FOREIGN KEY (anime_name) REFERENCES anime(anime_name)
+        FOREIGN KEY (member_id) REFERENCES member(member_id) ON DELETE CASCADE,
+        FOREIGN KEY (anime_name) REFERENCES anime(anime_name) ON DELETE CASCADE
     )
 ''')
 
@@ -106,7 +108,7 @@ cursor.execute('''
         type TEXT NOT NULL,
         
         PRIMARY KEY (anime_name, type),
-        FOREIGN KEY (anime_name) REFERENCES anime(anime_name)
+        FOREIGN KEY (anime_name) REFERENCES anime(anime_name) ON DELETE CASCADE
     )
 ''')
 
@@ -117,8 +119,8 @@ cursor.execute('''
         reply_id INTEGER NOT NULL,
         
         PRIMARY KEY (comment_id, reply_id),
-        FOREIGN KEY (comment_id) REFERENCES comment(comment_id),
-        FOREIGN KEY (reply_id) REFERENCES comment(comment_id)
+        FOREIGN KEY (comment_id) REFERENCES comment(comment_id) ON DELETE CASCADE,
+        FOREIGN KEY (reply_id) REFERENCES comment(comment_id) ON DELETE CASCADE
     )
 ''')
 
@@ -130,8 +132,8 @@ cursor.execute('''
         rating REAL NOT NULL CHECK(rating >= 0 AND rating <= 5),
         
         PRIMARY KEY (member_id, anime_name),
-        FOREIGN KEY (member_id) REFERENCES member(member_id),
-        FOREIGN KEY (anime_name) REFERENCES anime(anime_name)
+        FOREIGN KEY (member_id) REFERENCES member(member_id) ON DELETE CASCADE,
+        FOREIGN KEY (anime_name) REFERENCES anime(anime_name) ON DELETE CASCADE
     )
 ''')
 
@@ -143,8 +145,8 @@ cursor.execute('''
         rating REAL NOT NULL CHECK(rating >= 0 AND rating <= 5),
         
         PRIMARY KEY (member_id, episode_id),
-        FOREIGN KEY (member_id) REFERENCES member(member_id),
-        FOREIGN KEY (episode_id) REFERENCES episode(episode_id)
+        FOREIGN KEY (member_id) REFERENCES member(member_id) ON DELETE CASCADE,
+        FOREIGN KEY (episode_id) REFERENCES episode(episode_id) ON DELETE CASCADE
     )
 ''')
 
