@@ -89,7 +89,7 @@ class CommentDAO:
                 return Comment(row[1], CommentDAO.get_replys_by_comment_id(conn, row[0]), row[4], row[5], row[6], row[0], row[2], row[3])
             else:
                 cursor.execute("SELECT reply_id FROM commentComment")
-                replies = cursor.fetchall()
+                replies = [reply_id for (reply_id,) in cursor.fetchall()]
                 if comment_id not in replies:
                     cursor.execute("SELECT * FROM comment WHERE comment_id = ?", (comment_id,))
                     row = cursor.fetchone()

@@ -143,6 +143,23 @@ def episodePage(episode_id, member_id):
                            season_name=season.season_name, anime_name=season.getAnime_name(),
                            getUsername=MemberDAO.get_member_username, getConn=obtenir_connection)
     
+@app.route('/episodePageAdmin/<episode_id>')
+def episodePageAdmin(episode_id):
+    conn = obtenir_connection()
+    episode = EpisodeDAO.get_episode(conn, episode_id)
+    season = SeasonDAO.get_season(conn, episode.getSeason_id())
+    fermer_connection(conn)
+    return render_template('EpisodeAdmin.html', episode=episode, season_name=season.season_name,
+                           anime_name=season.getAnime_name(), getUsername=MemberDAO.get_member_username,
+                           getConn=obtenir_connection)
+    
+@app.route('/delete_comment/<comment_id>/<episode_id>', methods=['POST'])
+def delete_comment(comment_id, episode_id):
+    conn = obtenir_connection()
+    CommentDAO.delete_comment(conn, comment_id)
+    fermer_connection(conn)
+    return redirect(url_for('episodePageAdmin', episode_id=episode_id))
+    
 @app.route('/add_comment/<episode_id>/<member_id>', methods=['POST', 'GET'])
 def add_comment(episode_id, member_id):
     comment_content = request.form['comment']

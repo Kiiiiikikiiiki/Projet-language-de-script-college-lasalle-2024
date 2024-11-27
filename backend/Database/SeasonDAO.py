@@ -96,3 +96,15 @@ class SeasonDAO:
         except sqlite3.Error as e:
             print(e)
             return None
+        
+    def get_season_id_by_season_name_and_anime_name(conn: sqlite3.Connection, season_name: str, anime_name: str) -> int:
+        try:
+            cursor = conn.cursor()
+            cursor.execute("SELECT season_id FROM season WHERE season_name = ? AND anime_name = ?", (season_name, anime_name))
+            row = cursor.fetchone()
+            
+            return row[0]
+        except sqlite3.Error as e:
+            print(e)
+            return None
+        
