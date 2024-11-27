@@ -7,6 +7,7 @@ from backend.Class_Domain.User import User
 from backend.Database.AnimeDAO import AnimeDAO
 from backend.Database.EpisodeDAO import EpisodeDAO
 from backend.Database.SeasonDAO import SeasonDAO
+from backend.Database.CommentDAO import CommentDAO
 
 app = Flask(__name__, template_folder='frontend', static_folder='frontend')
 
@@ -120,7 +121,16 @@ def episodePage(episode_id, member_id):
     season = SeasonDAO.get_season(conn, episode.getSeason_id())
     fermer_connection(conn)
     return render_template('Episodes.html', episode=episode, member_id=member_id,
-                           season_name=season.season_name, anime_name=season.getAnime_name())
+                           season_name=season.season_name, anime_name=season.getAnime_name(),
+                           getUsername=MemberDAO.get_member_username, getConn=obtenir_connection)
+    
+@app.route('/add_comment/<episode_id>/<member_id>', methods=['POST', 'GET'])
+def add_comment(episode_id, member_id):
+    comment_content = request.form['comment']
+    conn = obtenir_connection()
+    CommentDAO.add_comment(conn, comment_content, member_id, episode_id, 0, 0)
+    fermer_connection(conn)
+    return redirect(url_for('episodePage', episode_id=episode_id, member_id=member_id))
 
 @app.route('/register', methods=['POST', 'GET'])
 def register():

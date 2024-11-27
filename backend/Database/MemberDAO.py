@@ -185,3 +185,13 @@ class MemberDAO:
         except sqlite3.Error as e:
             print(e)
             return []
+        
+    def get_member_username(conn: sqlite3.Connection, member_id: int) -> str:
+        try:
+            cursor = conn.cursor()
+            cursor.execute("SELECT username FROM member WHERE member_id = ?", (member_id,))
+            row = cursor.fetchone()
+            return row[0]
+        except sqlite3.Error as e:
+            print(e)
+            return ""

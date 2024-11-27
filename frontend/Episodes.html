@@ -31,7 +31,7 @@
             </div>
             <div class="comments-section">
                 <div class="writing-field">
-                    <form action="" metho="POST">
+                    <form action="{{ url_for('add_comment', episode_id=episode.getEpisode_id(), member_id=member_id) }}" method="POST">
                         <label for="comment">Comment Section: </label><br/>
                         <textarea name="comment" id="comment" cols="180" rows="3" placeholder="Leave your comment..."></textarea><br/>
                         <button type="submit">Submit</button>
@@ -39,42 +39,17 @@
                 </div>
                 <div class="table-comments">
                     <table>
-                        <tr>
-                            <td><h4>Username1</h4></td>
-                            <td>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam vitae dolor vitae
-                                magna feugiat venenatis at a urna. Duis a luctus dolor. Aenean ultrices dui ut
-                                commodo luctus. In mauris quam, vulputate nec accumsan non, congue ut nibh. Cras
-                                eleifend tincidunt euismod.</p><br/>
-                                <button class="like">👍<span id="nb-likes">20.000</span></button>
-                                <button class="dislike">👎<span id="nb-dislikes">1.000</span></button id="nb-dislikes">
-                                <button class="reply-btn">Reply Comment</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><h4>Username2</h4></td>
-                            <td>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam vitae dolor vitae
-                                magna feugiat venenatis at a urna. Duis a luctus dolor. Aenean ultrices dui ut
-                                commodo luctus. In mauris quam, vulputate nec accumsan non, congue ut nibh. Cras
-                                eleifend tincidunt euismod.</p>
-                                <button class="like">👍<span id="nb-likes">20.000</span></button>
-                                <button class="dislike">👎<span id="nb-dislikes">1.000</span></button id="nb-dislikes">
-                                <button class="reply-btn">Reply Comment</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><h4>Username3</h4></td>
-                            <td>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam vitae dolor vitae
-                                magna feugiat venenatis at a urna. Duis a luctus dolor. Aenean ultrices dui ut
-                                commodo luctus. In mauris quam, vulputate nec accumsan non, congue ut nibh. Cras
-                                eleifend tincidunt euismod.</p>
-                                <button class="like">👍<span id="nb-likes">20.000</span></button>
-                                <button class="dislike">👎<span id="nb-dislikes">1.000</span></button id="nb-dislikes">
-                                <button class="reply-btn">Reply Comment</button>
-                            </td>
-                        </tr>
+                        {% for comment in episode.comments %}
+                            <tr>
+                                <td><h4>{{ getUsername(getConn(), comment.getMember_id()) }}</h4></td>
+                                <td>
+                                    <p>{{ comment.comment_content }}</p><br/>
+                                    <button class="like">👍<span id="nb-likes">{{ comment.nb_like }}</span></button>
+                                    <button class="dislike">👎<span id="nb-dislikes">{{ comment.nb_dislike }}</span></button id="nb-dislikes">
+                                    <button class="reply-btn">Reply Comment</button>
+                                </td>
+                            </tr>
+                        {% endfor %}
                     </table>
                 </div> 
             </div>

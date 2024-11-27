@@ -80,12 +80,22 @@ class CommentDAO:
         """
         try:
             cursor = conn.cursor()
-            cursor.execute("SELECT * FROM comment WHERE comment_id = ?", (comment_id,))
+            cursor.execute("SELECT * FROM commentComment WHERE comment_id = ?", (comment_id,))
             row = cursor.fetchone()
+
             if row is not None:
+                cursor.execute("SELECT * FROM comment WHERE comment_id = ?", (comment_id,))
+                row = cursor.fetchone()
                 return Comment(row[1], CommentDAO.get_replys_by_comment_id(conn, row[0]), row[4], row[5], row[6], row[0], row[2], row[3])
             else:
-                return None
+                cursor.execute("SELECT reply_id FROM commentComment")
+                replies = cursor.fetchall()
+                if comment_id not in replies:
+                    cursor.execute("SELECT * FROM comment WHERE comment_id = ?", (comment_id,))
+                    row = cursor.fetchone()
+                    return Comment(row[1], CommentDAO.get_replys_by_comment_id(conn, row[0]), row[4], row[5], row[6], row[0], row[2], row[3])
+                else:
+                    return None
         except sqlite3.Error as e:
             print(e)
             return None
@@ -134,7 +144,9 @@ class CommentDAO:
             if len(rows) > 0:
                 comments = []
                 for row in rows:
-                    comments.append(CommentDAO.get_comment_by_id(conn, row[0]))
+                    comment = CommentDAO.get_comment_by_id(conn, row[0])
+                    if comment is not None:
+                        comments.append(comment)
                 return comments
             else:
                 return []
