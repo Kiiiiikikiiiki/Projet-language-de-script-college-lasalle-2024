@@ -107,12 +107,31 @@ def search_user():
     fermer_connection(conn)
     return render_template('Users.html', users=users)
 
-@app.route('/animePage/<anime_name>/<member_id>')
-def animePage(anime_name, member_id):
+@app.route('/animePage/<anime_name>')
+def animePage(anime_name):
     conn = obtenir_connection()
     anime = AnimeDAO.get_anime(conn, anime_name)
     fermer_connection(conn)
-    return render_template('AnimePage.html', anime=anime, member_id=member_id)
+    return render_template('AnimePage.html', anime=anime)
+
+@app.route('/addSeason/<anime_name>', methods=['POST', 'GET'])
+def add_season(anime_name):
+    if request.method == 'POST':
+        season_name = request.form['season_name']
+        season_release_date = request.form['season_release_date']
+        conn = obtenir_connection()
+        print(anime_name)
+        SeasonDAO.add_season(conn, season_name, anime_name, season_release_date)
+        fermer_connection(conn)
+        return redirect(url_for('animePage', anime_name=anime_name))
+        
+
+@app.route('/animePageMember/<anime_name>/<member_id>')
+def animePageMember(anime_name, member_id):
+    conn = obtenir_connection()
+    anime = AnimeDAO.get_anime(conn, anime_name)
+    fermer_connection(conn)
+    return render_template('AnimePageMember.html', anime=anime, member_id=member_id)
 
 @app.route('/episodePage/<episode_id>/<member_id>')
 def episodePage(episode_id, member_id):
