@@ -75,6 +75,14 @@ def delete_anime(anime_name):
     fermer_connection(conn)
     return redirect(url_for('animeList'))
 
+@app.route('/search_anime', methods=['GET'])
+def search_anime():
+    search = request.args.get('search-anime')
+    conn = obtenir_connection()
+    animes = AnimeDAO.search_anime(conn, search)
+    fermer_connection(conn)
+    return render_template('AnimeList.html', animes=animes)
+
 @app.route('/UserList')
 def userList():
     conn = obtenir_connection()

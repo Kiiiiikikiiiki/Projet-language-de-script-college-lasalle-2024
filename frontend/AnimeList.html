@@ -20,7 +20,7 @@
                 <div class="row">
                     <h1>Manage <b>Animes</b></h1>
                     <div class="search-container">
-                        <form action="#" method="get" class="serch-anime">
+                        <form action="{{ url_for('search_anime')}}" method="get" class="serch-anime">
                             <input type="text" placeholder="Search Anime..." name="search-anime" id="search-anime">
                             <button type="submit" class="search-btn"><img src="frontend/Image/Icons/search.png" alt="search icon"></button>
                         </form>
@@ -43,7 +43,7 @@
                     <tbody>
                         {% for anime in animes %}
                         <tr>
-                            <td><a href="/animePage">{{ anime.anime_name }}</a></td>
+                            <td><a href="/animePage/{{ anime.anime_name }}/1">{{ anime.anime_name }}</a></td>
                             <td>{{ anime.seasons | length }}</td>
                             <td>{{ anime.rating }}</td>
                             <td>{{ anime.release_date }}</td>

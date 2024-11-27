@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/frontend/CSS/styleAnimepage.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <title>Home Page: Munchyroll</title>
+</head>
+
+<body>
+    <div class="background">
+    </div>
+    <div class="my-container">
+        <div class="info-anime">
+            <div class="image-anime">
+                <img src="/frontend/{{ anime.picture_url[1:] }}">
+                <button type="button" class="btn btn-primary add-anime" data-toggle="modal" data-target="#add-anime-modal">
+                    <img src="/frontend/Image/Icons/add.png" alt="add icon">
+                </button>
+                <button class="like">⭐<span id="nb-likes">{{ anime.rating }}</span></button>
+                <h4>Release date: {{ anime.release_date.strftime('%m/%d/%Y') }}</h4>
+            </div>
+            <div class="description-anime">
+                <h1>{{ anime.anime_name }}</h1>
+                <p>{{ anime.desc }}</p>
+            </div>
+        </div>        
+        <div class="episodes-anime">
+            <table class="episodes-table">
+                <tbody>
+                    {% for season in anime.seasons %}
+                        <tr>
+                            <td colspan="4"><h3>{{ season.season_name }}</h3></td>
+                        </tr>
+                        {% for episode in season.episodes %}
+                            <tr>
+                                <td><a href="/episodePage/{{ episode.getEpisode_id() }}/{{ member_id}}" target="contentFrame">{{ episode.episode_name }}</a></td>
+                                <td>Release date: {{ episode.release_date.strftime('%m/%d/%Y') }}</td>
+                                <td>👍<span id="nb-likes">{{ episode.nb_like }}</span></td>
+                                <td>👎<span id="nb-dislikes">{{  episode.nb_dislike }}</span></td>
+                            </tr>
+                        {% endfor %}
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+
+</html>
