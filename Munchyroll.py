@@ -39,8 +39,6 @@ def dashboard(member_id):
     animeList = AnimeDAO.getAll_anime(conn)
     newEpisode = EpisodeDAO.getEpisodesFromToday(conn)
     fermer_connection(conn)
-    for anime in animeList:
-        print(anime.anime_name)
     return render_template('Dashboard.html', member_id=member_id, animeList=animeList, newEpisode=newEpisode,
                            getConn=obtenir_connection, getSeason=SeasonDAO.get_season)
 
