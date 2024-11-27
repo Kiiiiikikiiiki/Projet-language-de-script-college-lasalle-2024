@@ -6,6 +6,7 @@ from backend.Database.AnimeDAO import AnimeDAO
 from backend.Class_Domain.User import User
 from backend.Database.AnimeDAO import AnimeDAO
 from backend.Database.EpisodeDAO import EpisodeDAO
+from backend.Database.SeasonDAO import SeasonDAO
 
 app = Flask(__name__, template_folder='frontend', static_folder='frontend')
 
@@ -116,8 +117,10 @@ def animePage(anime_name, member_id):
 def episodePage(episode_id, member_id):
     conn = obtenir_connection()
     episode = EpisodeDAO.get_episode(conn, episode_id)
+    season = SeasonDAO.get_season(conn, episode.getSeason_id())
     fermer_connection(conn)
-    return render_template('Episodes.html', episode=episode, member_id=member_id)
+    return render_template('Episodes.html', episode=episode, member_id=member_id,
+                           season_name=season.season_name, anime_name=season.getAnime_name())
 
 @app.route('/register', methods=['POST', 'GET'])
 def register():
