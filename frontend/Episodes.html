@@ -25,8 +25,8 @@
             </a>
             <div class="episode-title">
                 <h2>{{ episode.episode_name }}</h2>
-                <button class="like">👍<span id="nb-likes">{{ episode.nb_like }}</span></button>
-                <button class="dislike">👎<span id="nb-dislikes">{{ episode.nb_dislike }}</span></button id="nb-dislikes">
+                <a href="/add_like_episode/{{  episode.getEpisode_id()}}/{{ member_id }}"><button class="like">👍<span id="nb-likes">{{ episode.nb_like }}</span></button></a>
+                <a href="/add_dislike_episode/{{  episode.getEpisode_id()}}/{{ member_id }}"><button class="dislike">👎<span id="nb-dislikes">{{ episode.nb_dislike }}</span></button id="nb-dislikes"></a>
                 <p>Release date: {{ episode.release_date.strftime('%m/%d/%Y') }}</p>
             </div>
             <div class="comments-section">
@@ -44,8 +44,8 @@
                                 <td><h4>{{ getUsername(getConn(), comment.getMember_id()) }}</h4></td>
                                 <td>
                                     <p>{{ comment.comment_content }}</p><br/>
-                                    <button class="like">👍<span id="nb-likes">{{ comment.nb_like }}</span></button>
-                                    <button class="dislike">👎<span id="nb-dislikes">{{ comment.nb_dislike }}</span></button id="nb-dislikes">
+                                    <a href="/add_like_comment/{{  comment.getComment_id()}}/{{ member_id }}/{{ episode.getEpisode_id() }}"><button class="like">👍<span id="nb-likes">{{ comment.nb_like }}</span></button></a>
+                                    <a href="/add_dislike_comment/{{  comment.getComment_id()}}/{{ member_id }}/{{ episode.getEpisode_id() }}"><button class="dislike">👎<span id="nb-dislikes">{{ comment.nb_dislike }}</span></button id="nb-dislikes"></a>
                                     <button class="reply-btn">Reply Comment</button>
                                 </td>
                             </tr>
