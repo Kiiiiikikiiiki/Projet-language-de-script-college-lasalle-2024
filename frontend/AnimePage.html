@@ -19,9 +19,6 @@
         <div class="info-anime">
             <div class="image-anime">
                 <img src="/frontend/{{ anime.picture_url[1:] }}">
-                <button type="button" class="btn btn-primary add-anime" data-toggle="modal" data-target="#add-anime-modal">
-                    <img src="/frontend/Image/Icons/add.png" alt="add icon">
-                </button>
                 <button class="like">⭐<span id="nb-likes">{{ anime.rating }}</span></button>
                 <h4>Release date: {{ anime.release_date.strftime('%m/%d/%Y') }}</h4>
             </div>
